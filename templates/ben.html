@@ -1,0 +1,182 @@
+<!DOCTYPE html> 
+	<html>
+	<head>
+		<title>Team | Ben</title>
+		<link rel="stylesheet"  href="static/css/tennis.css">
+	</head>
+
+	<body>
+		<header id="header">
+				 <h1>Ben's Team</h1>
+		</header>
+		 <div id= 'main' style = "text-align: center;">
+		  <div style="display: inline-block; text-align: left; max-width: 60%;">
+		<table style="width:100%">
+		<col align="left">
+		<col align="left">
+		<col align="right">
+  		<tr>
+  			<th>Date</th>
+    		<th>Serve</th> 
+    		<th>Power</th>
+    		<th>Return</th>
+    		<th>Defense</th>
+    		<th>Mind</th>
+    		<th>Bench</th>
+    		<th>Bench</th>
+    		<th>Bench<th>
+    	</tr> 
+      <tr>
+
+      <td>-</td>
+
+      {% for player in user.team %}
+        <td>{{ player.name }}</td>
+      {% endfor %}
+
+      {% for player in user.bench %}
+        <td>{{ player.name }}</td>
+      {% endfor %}
+
+      </tr>
+
+      {% for day in range(0,user.team[0].history|length)  %}
+      <tr>
+        
+        <td> {{ user.team[0].history[day][0] }} </td>
+
+        {% for player in user.team %}
+          <td>{{ player.history[day][1] }}</td>
+        {% endfor %}
+
+        {% for player in user.bench %}
+          <td>{{ player.history[day][1] }}</td>
+        {% endfor %}
+
+      </tr>
+      {% endfor %}
+
+      <tr>
+
+      <td> </td>
+
+      {% for player in user.team %}
+        <td> </td>
+      {% endfor %}
+
+
+      {% for player in user.bench %}
+      <td>
+    	 <form action="/Ben" method="post">
+          <button type="submit" name="bench" value= "{{ player.name }}">Add</button>
+      </form>
+    	</td>
+      {% endfor %}
+
+      </tr>		
+							</table>
+
+							<footer>
+    							<ul>
+        							<li><a href="mailto:ben.brady1224@gmail.com">email</a></li>
+        							<li><a href="https://github.com/bradyb">github.com/bradyb</a></li>
+								</ul>
+							</footer>
+							</div>
+							</div>
+									
+							</body>
+							</html> 
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h1>The<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h1>The XMLHttpRequest Object</h1>
+<button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html> XMLHttpRequest Object</h1>
+<button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+  <h2>Let AJAX change this text</h2>
+  <button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+</script>
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajax_info.txt", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
+ -->

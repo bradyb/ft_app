@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+	<html>
+	<head>
+		<title>Fantasy Tennis</title>
+		<!-- link to main stylesheet -->
+		<link rel="stylesheet" href="static/css/tennis.css">
+	</head>
+
+	<body>
+		<header id="header">
+				 <h1>Fantasy Tennis</h1>
+		</header>
+		<div style = "text-align: center;">
+		<div style="display: inline-block; text-align: left; max-width: 60%;">
+		<table style="width:100%">
+		<col align="left">
+		<col align="left">
+		<col align="right">
+  		<tr>
+    		<th>Player</th>
+   			<th>Serve</th> 
+    		<th>Power</th>
+    		<th>Return</th>
+    		<th>Defense</th>
+    		<th>Mind</th>
+    		<th>Total</th>
+  		</tr> 
+  		
+  		{% for person in users %}
+  			<tr><td><a href= {{ person.name }} >{{ person.name }}</a></td>
+
+  			{% for player in person.team %}
+  				<td>{{ player.name }}</td>
+  			{% endfor %}
+
+  			</tr><td>  </td>
+
+  			{% for player in person.team %}
+  				<td>{{ player.points }}</td>
+  			{% endfor %}
+
+
+  			<td>{{ person.total }}</td>
+
+  			</tr>
+  			
+  			
+  		{% endfor %}		
+		</table>
+		<footer>
+    		<ul>
+        		<li><a href="mailto:ben.brady1224@gmail.com">email</a></li>
+        		<li><a href="https://github.com/bradyb">github.com/bradyb</a></li>
+			</ul>
+		</footer>
+		</div>
+		</div>
+	</body>
+	</html> 
+

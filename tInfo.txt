@@ -1,0 +1,10 @@
+1
+
+Ben
+m Novak Djokovic serve 0
+m Stanislas Wawrinka power 0
+m Dominic Thiem return 0
+m Roger Federer defense 0
+m Kei Niskikori mind 0
+m Gael Monfils return 1
+m Milos Raonic defense 1
