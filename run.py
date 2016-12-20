@@ -19,9 +19,12 @@ def Ben():
 @app.route('/Ben', methods=['GET', 'POST'])
 def subPlayers():
 	playerName = request.form.get("bench",None)
-	print playerName
-	user = sub.moveFromBench(playerName,"Ben")
-	return render_template('ben.html', user=user)
+	if playerName == None:
+		users = pickle.load(open("playerInfo.p", "rb")) 
+		return render_template('index.html', users=users)
+	else:
+		user = sub.moveFromBench(playerName,"Ben")
+		return render_template('ben.html', user=user)
 
 
 if __name__ == "__main__":
