@@ -20,8 +20,14 @@ def Ben():
 def subPlayers():
 	playerName = request.form.get("bench",None)
 	if playerName == None:
-		users = pickle.load(open("playerInfo.p", "rb")) 
-		return render_template('index.html', users=users)
+		users = pickle.load(open("playerInfo.p", "rb"))
+		playerName = request.form.get("subbed-player-name",None)
+		playerAttr = request.form.get("subbed-player-attr",None)
+		
+		for user in users:
+			if user.name == "Ben":
+				user.addPickUp(playerName,'m',playerAttr)
+				return render_template('ben.html', users=users)
 	else:
 		user = sub.moveFromBench(playerName,"Ben")
 		return render_template('ben.html', user=user)
