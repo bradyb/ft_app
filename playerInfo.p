@@ -12,7 +12,7 @@ p6
 (dp7
 S'name'
 p8
-S'Milos Raonic'
+S'Roger Federer'
 p9
 sS'attribute'
 p10
@@ -34,7 +34,7 @@ tPlayer
 p16
 (dp17
 g8
-S'Gael Monfils'
+S'Dominic Thiem'
 p18
 sg10
 I3
@@ -46,24 +46,15 @@ sg13
 I0
 sg14
 (lp19
-sbasS'total'
-p20
-I0
-sg8
-S'Ben'
-p21
-sS'team'
-p22
-(lp23
-(iplayerTypes
+sba(iplayerTypes
 tPlayer
-p24
-(dp25
+p20
+(dp21
 g8
-S'Novak Djokovic'
-p26
+VDavid Ferrer
+p22
 sg10
-I1
+I2
 sg11
 I1
 sg12
@@ -71,16 +62,25 @@ S'm'
 sg13
 I0
 sg14
+(lp23
+sbasS'total'
+p24
+I0
+sg8
+S'Ben'
+p25
+sS'team'
+p26
 (lp27
-sba(iplayerTypes
+(iplayerTypes
 tPlayer
 p28
 (dp29
 g8
-S'Stanislas Wawrinka'
+S'Novak Djokovic'
 p30
 sg10
-I2
+I1
 sg11
 I1
 sg12
@@ -94,10 +94,10 @@ tPlayer
 p32
 (dp33
 g8
-S'Dominic Thiem'
+S'Stanislas Wawrinka'
 p34
 sg10
-I3
+I2
 sg11
 I1
 sg12
@@ -111,10 +111,10 @@ tPlayer
 p36
 (dp37
 g8
-S'Roger Federer'
+S'Gael Monfils'
 p38
 sg10
-I4
+I3
 sg11
 I1
 sg12
@@ -128,8 +128,25 @@ tPlayer
 p40
 (dp41
 g8
-S'Kei Niskikori'
+S'Milos Raonic'
 p42
+sg10
+I4
+sg11
+I1
+sg12
+S'm'
+sg13
+I0
+sg14
+(lp43
+sba(iplayerTypes
+tPlayer
+p44
+(dp45
+g8
+S'Kei Niskikori'
+p46
 sg10
 I5
 sg11
@@ -139,5 +156,5 @@ S'm'
 sg13
 I0
 sg14
-(lp43
+(lp47
 sbasba.

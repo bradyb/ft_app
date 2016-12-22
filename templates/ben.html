@@ -32,7 +32,28 @@
       {% endfor %}
 
       {% for player in user.bench %}
-        <td>{{ player.name }}</td>
+
+        {% if player.attribute|int() == 1 %}
+        <td>{{ player.name }} /
+               Serve</td>
+        {% endif %}
+        {% if player.attribute|int() == 2 %}
+        <td>{{ player.name }} /
+               Power</td>
+        {% endif %}
+        {% if player.attribute|int() == 3 %}
+        <td>{{ player.name }} /
+               Return</td>
+        {% endif %}
+        {% if player.attribute|int() == 4 %}
+        <td>{{ player.name }} /
+               Defense</td>
+        {% endif %}
+        {% if player.attribute|int() == 5 %}
+        <td>{{ player.name }} /
+               Mind</td>
+        {% endif %}
+        
       {% endfor %}
 
       {% if user.bench|length < 3 %}
