@@ -81,9 +81,9 @@ def updateLeague():
 	## TODO: tourney map of name to code ##
 	## does the name change from year to year? It must, right? ##
 
-	tourneyName = "barclays-atp-world-tour-finals"
+	tourneyName = "brisbane"
 
-	tourneyCode = "605"
+	tourneyCode = "339"
 
 	tourneyData = pickle.load(open( "playerInfo.p", "rb" ))
 
