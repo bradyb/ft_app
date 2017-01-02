@@ -1,13 +1,13 @@
 <!DOCTYPE html> 
 	<html>
 	<head>
-		<title>Team | Ben</title>
+		<title>Team | {{ teamName }}</title>
 		<link rel="stylesheet"  href="static/css/tennis.css">
 	</head>
 
 	<body>
 		<header id="header">
-				 <h1>Ben's Team</h1>
+				 <h1>{{ teamName }}'s Team</h1>
 		</header>
 		 <div id= 'main' style = "text-align: center;">
 		  <div style="display: inline-block; text-align: left; max-width: 60%;">
@@ -56,7 +56,7 @@
         
       {% endfor %}
 
-      {% if user.bench|length < 3 %}
+      <!--{% if user.bench|length < 3 %}
 
       <td>
        <form action="/Ben" method="post">
@@ -66,7 +66,9 @@
        </form>
       </td>
 
-      {% endif %}
+      {% endif %}-->
+
+
 
       </tr>
 
@@ -97,7 +99,7 @@
 
       {% for player in user.bench %}
       <td>
-    	 <form action="/Ben" method="post">
+    	 <form action={{ teamName }} method="post">
           <button type="submit" name="bench" value= "{{ player.name }}">Add</button>
       </form>
     	</td>

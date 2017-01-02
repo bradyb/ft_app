@@ -12,11 +12,11 @@ p6
 (dp7
 S'name'
 p8
-S'Grigor Dimitrov'
+S'Stanislas Wawrinka'
 p9
 sS'attribute'
 p10
-I3
+I2
 sS'alive'
 p11
 I1
@@ -25,33 +25,33 @@ p12
 S'm'
 sS'points'
 p13
-I27
+I0
 sS'history'
 p14
 (lp15
 (S'1/2/2017'
 p16
-I27
+S'-'
 tp17
 asba(iplayerTypes
 tPlayer
 p18
 (dp19
 g8
-S'Stanislas Wawrinka'
+S'Stephane Robert'
 p20
 sg10
-I2
+I3
 sg11
-I1
+I0
 sg12
 S'm'
 sg13
-I0
+I31
 sg14
 (lp21
 (g16
-S'-'
+I31
 tp22
 asbasS'total'
 p23
@@ -107,20 +107,20 @@ tPlayer
 p37
 (dp38
 g8
-S'Stephane Robert'
+S'Grigor Dimitrov'
 p39
 sg10
 I3
 sg11
-I0
+I1
 sg12
 S'm'
 sg13
-I31
+I27
 sg14
 (lp40
 (g16
-I31
+I27
 tp41
 asba(iplayerTypes
 tPlayer
