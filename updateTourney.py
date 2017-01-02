@@ -145,6 +145,7 @@ def updateLeague():
 
 			else:
 				player.history.append((todayDate, '-'))
+				continue
 
 			player.points = player.points + pointsEarned
 
@@ -176,6 +177,7 @@ def updateLeague():
 
 			else:
 				benchPlayer.history.append((todayDate, '-'))
+				continue
 
 			benchPlayer.points = benchPlayer.points + pointsEarned
 
