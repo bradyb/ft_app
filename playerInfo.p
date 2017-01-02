@@ -55,7 +55,7 @@ S'-'
 tp22
 asbasS'total'
 p23
-I60
+I61
 sg8
 S'Ben'
 p24
@@ -96,11 +96,11 @@ I1
 sg12
 S'm'
 sg13
-I38
+I39
 sg14
 (lp35
 (g16
-I38
+I39
 tp36
 asba(iplayerTypes
 tPlayer
@@ -209,7 +209,7 @@ sg14
 I19
 tp64
 asbasg23
-I45
+I100
 sg8
 S'Santay'
 p65
@@ -280,7 +280,7 @@ tPlayer
 p82
 (dp83
 g8
-S'Nicholas Mahut'
+S'Nicolas Mahut'
 p84
 sg10
 I4
@@ -289,11 +289,11 @@ I1
 sg12
 S'm'
 sg13
-I0
+I55
 sg14
 (lp85
 (g16
-S'-'
+I55
 tp86
 asba(iplayerTypes
 tPlayer
