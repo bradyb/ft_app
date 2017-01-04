@@ -98,7 +98,7 @@ def updateLeague():
 
 	today = datetime.datetime.now()
 
-	todayDate = str(today.month) + '/' + str(today.day) + '/' + str(today.year)
+	todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
 
 	print todayDate
 
