@@ -18,6 +18,13 @@ def getPoints(playerName, index, baseURL, playerAttr, statMap, win, links, neede
 	tree1 = html.fromstring(statsPage.content)
 
 	stats = tree1.xpath('//*[@id="matchStatsData"]/text()')
+	name = tree1.xpath('//*[@id="modalScoresMatchStatsTable"]/div[1]/div[1]/div[2]/a/span[2]/text()')
+
+	if playerName.split(' ')[1] in name[0]:
+		win = 1;
+	else: 
+		win = 0
+
 	statsList = stats[0].split('\r\n')
 
 	stats = -1
@@ -110,6 +117,7 @@ def updateLeague():
 
 	print losers
 
+
 	links = tree.xpath('//*[@id="scoresResultsContent"]/div/table/tbody/tr/td[8]/a/@href')
 
 	pointsEarned = 0
@@ -117,6 +125,7 @@ def updateLeague():
 	neededStats = ["Aces", "DoubleFaults", "SecondServePointsWonPercentage", 
 						"BreakPointsSavedDividend", "BreakPointsSavedDivisor", "TotalReturnPointsWonPercentage"]
 
+	orderBool = 0
 	for user in tourneyData:
 
 		for player in user.team:
@@ -129,14 +138,14 @@ def updateLeague():
 
 			if player.name in winners:
 
-				orderBool = (player.name.split(' ')[1] < losers[winners.index(player.name)].split(' ')[1])
+				#orderBool = (player.name.split(' ')[1] < losers[winners.index(player.name)].split(' ')[1])
 
 				pointsEarned = getPoints(player.name, winners.index(player.name), baseURL, player.attribute, 
 								statMap, orderBool, links, neededStats)
 
 			elif player.name in losers:
 
-				orderBool = (player.name.split(' ')[1] < winners[losers.index(player.name)].split(' ')[1])
+				#orderBool = (player.name.split(' ')[1] < winners[losers.index(player.name)].split(' ')[1])
 				
 				pointsEarned = getPoints(player.name, losers.index(player.name), baseURL, player.attribute, 
 								statMap, orderBool, links, neededStats)
