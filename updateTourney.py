@@ -133,7 +133,7 @@ def updateLeague():
 			
 
 			if player.alive != 1:
-				player.history.append((todayDate, '-'))
+				player.history.append((todayDate, 'OUT'))
 				continue
 
 			if player.name in winners:
@@ -153,7 +153,7 @@ def updateLeague():
 				player.alive = 0
 
 			else:
-				player.history.append((todayDate, '-'))
+				player.history.append((todayDate, 'DNP'))
 				continue
 
 			player.points = player.points + pointsEarned
@@ -165,7 +165,7 @@ def updateLeague():
 		for benchPlayer in user.bench:			
 
 			if benchPlayer.alive != 1:
-				benchPlayer.history.append((todayDate, '-'))
+				benchPlayer.historiy.append((todayDate, 'OUT'))
 				continue
 
 			if benchPlayer.name in winners:
@@ -185,12 +185,10 @@ def updateLeague():
 				benchPlayer.alive = 0
 
 			else:
-				benchPlayer.history.append((todayDate, '-'))
+				benchPlayer.history.append((todayDate, 'DNP'))
 				continue
 
-			benchPlayer.points = benchPlayer.points + pointsEarned
-
-			benchPlayer.history.append((todayDate, pointsEarned))
+			benchPlayer.history.append((todayDate,'(' + str(pointsEarned) + ')'))
 
 	sorted(tourneyData, key=lambda player: player.total)
 
