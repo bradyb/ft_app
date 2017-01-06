@@ -83,7 +83,7 @@ def getPoints(playerName, index, baseURL, playerAttr, statMap, win, links, neede
 
 
 
-def updateLeague():
+def updateLeague(todayDate = None):
 
 	## TODO: tourney map of name to code ##
 	## does the name change from year to year? It must, right? ##
@@ -96,9 +96,9 @@ def updateLeague():
 
 	statMap = pickle.load(open("statMap.p", "rb"))
 
-	today = datetime.datetime.now()
-
-	todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
+	if todayDate == None:
+		today = datetime.datetime.now()
+		todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
 
 	print todayDate
 
@@ -137,7 +137,7 @@ def updateLeague():
 				continue
 
 			if player.name in winners:
-
+				# does this ordering invariant always hold?
 				#orderBool = (player.name.split(' ')[1] < losers[winners.index(player.name)].split(' ')[1])
 
 				pointsEarned = getPoints(player.name, winners.index(player.name), baseURL, player.attribute, 
@@ -197,5 +197,6 @@ def updateLeague():
 	pickle.dump( tourneyData, open( "playerInfo.p", "wb" ) )
 
 if __name__ == "__main__":
-	updateLeague()
+	date = raw_input('Enter today''s date: ')
+	updateLeague(date)
 	
