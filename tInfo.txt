@@ -7,7 +7,7 @@ m Stephane Robert return 0
 m Milos Raonic defense 0
 m Rafael Nadal mind 0
 m Grigor Dimitrov return 1
-m Stanislas Wawrinka power 1
+m Stan Wawrinka power 1
 
 Santay 
 m Milos Raonic serve 0
@@ -15,5 +15,5 @@ m Sam Querrey power 0
 m David Ferrer return 0
 m Nicolas Mahut defense 0
 m Kei Nishikori mind 0
-m Stanislas Wawrinka defense 1
+m Stan Wawrinka defense 1
 m Grigor Dimitrov power 1
