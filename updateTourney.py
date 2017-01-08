@@ -165,7 +165,7 @@ def updateLeague(todayDate = None):
 		for benchPlayer in user.bench:			
 
 			if benchPlayer.alive != 1:
-				benchPlayer.historiy.append((todayDate, 'OUT'))
+				benchPlayer.history.append((todayDate, 'OUT'))
 				continue
 
 			if benchPlayer.name in winners:
