@@ -1,19 +1,46 @@
-2
+5
 
 Ben
-m Bernard Tomic serve 0
-m Nicolas Mahut power 0
-m Stephane Robert return 0
-m Milos Raonic defense 0
-m Rafael Nadal mind 0
-m Grigor Dimitrov return 1
-m Stan Wawrinka power 1
+m Nick Kyrgios serve 0
+m John Isner power 0
+f Angelique Kerber return 0
+m Stan Wawrinka defense 0
+m Novak Djokovic mind 0
+m Roger Federer serve 1
+m Andy Murray power 1
 
 Santay 
 m Milos Raonic serve 0
-m Sam Querrey power 0
-m David Ferrer return 0
-m Nicolas Mahut defense 0
+m Roger Federer power 0
+m Rafael Nadal return 0
+m Grigor Dimitrov defense 0
 m Kei Nishikori mind 0
-m Stan Wawrinka defense 1
-m Grigor Dimitrov power 1
+f Angelique Kerber defense 1
+m Dominic Thiem return 1
+
+Geoff
+m Marin Cilic serve 0
+m Milos Raonic power 0
+m Andy Murray return 0
+m Novak Djokovic defense 0
+m Stan Wawrinka mind 0
+m Rafael Nadal mind 1
+m Jo-Wilfred Tsonga serve 1
+
+Jack
+m John Isner serve 0
+m Stan Wawrinka power 0
+m Novak Djokovic return 0
+m Andy Murray defense 0
+m Roger Federer mind 0
+m Gael Monfils power 1
+m Dominic Thiem power 1
+
+Steve
+m Ivo Karlovic serve 0
+m Marin Cilic power 0
+f Serena Williams return 0
+m Milos Raonic defense 0
+m Andy Murray mind 0
+m Tomas Berdych power 1
+m Novak Djokovic power 1

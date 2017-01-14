@@ -153,16 +153,16 @@ def updateLeague(todayDate = None):
 				player.alive = 0
 
 			else:
-                                dailyStatus = "DNP"
-                                if player.sex == 'f':
-                                    femaleResult = raw_input("Score for " + player.name + " " + player.attr  +  ": ")
-                                    if femaleResult.isdigit() or femaleResult[1:].isdigit:
-                                        pointsEarned = int(femaleResult)
-                                    elif femaleResult == "OUT":
-                                        player.alive = 0
-                                        dailyStatus = femaleResult
+                dailyStatus = "DNP"
+                if player.sex == 'f':
+                    femaleResult = raw_input("Score for " + player.name + " " + player.attr  +  ": ")
+                    if femaleResult.isdigit() or femaleResult[1:].isdigit:
+                        pointsEarned = int(femaleResult)
+                    elif femaleResult == "OUT":
+                        player.alive = 0
+                        dailyStatus = femaleResult
 
-                                player.history.append((todayDate, 'DNP'))
+                player.history.append((todayDate, 'DNP'))
 				continue
 
 			player.points = player.points + pointsEarned
@@ -194,7 +194,16 @@ def updateLeague(todayDate = None):
 				benchPlayer.alive = 0
 
 			else:
-				benchPlayer.history.append((todayDate, 'DNP'))
+                dailyStatus = "DNP"
+                if player.sex == 'f':
+                    femaleResult = raw_input("Score for " + player.name + " " + player.attr  +  ": ")
+                    if femaleResult.isdigit() or femaleResult[1:].isdigit:
+                        pointsEarned = int(femaleResult)
+                    elif femaleResult == "OUT":
+                        player.alive = 0
+                        dailyStatus = femaleResult
+
+                player.history.append((todayDate, 'DNP'))
 				continue
 
 			benchPlayer.history.append((todayDate,'(' + str(pointsEarned) + ')'))
