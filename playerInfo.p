@@ -12,11 +12,11 @@ p6
 (dp7
 S'name'
 p8
-S'Roger Federer'
+S'Andy Murray'
 p9
 sS'attribute'
 p10
-I1
+I2
 sS'alive'
 p11
 I1
@@ -34,10 +34,10 @@ tPlayer
 p16
 (dp17
 g8
-S'Andy Murray'
+S'Nick Kyrgios'
 p18
 sg10
-I2
+I1
 sg11
 I1
 sg12
@@ -60,7 +60,7 @@ tPlayer
 p24
 (dp25
 g8
-S'Nick Kyrgios'
+S'Roger Federer'
 p26
 sg10
 I1
