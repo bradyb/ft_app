@@ -12,7 +12,7 @@ p6
 (dp7
 S'name'
 p8
-S'Nick Kyrgios'
+S'Roger Federer'
 p9
 sS'attribute'
 p10
@@ -34,7 +34,7 @@ tPlayer
 p16
 (dp17
 g8
-S'John Isner'
+S'Andy Murray'
 p18
 sg10
 I2
@@ -60,7 +60,7 @@ tPlayer
 p24
 (dp25
 g8
-S'Roger Federer'
+S'Nick Kyrgios'
 p26
 sg10
 I1
@@ -77,7 +77,7 @@ tPlayer
 p28
 (dp29
 g8
-S'Andy Murray'
+S'John Isner'
 p30
 sg10
 I2
@@ -300,7 +300,7 @@ tPlayer
 p84
 (dp85
 g8
-S'Jo-Wilfred Tsonga'
+S'Jo-Wilfried Tsonga'
 p86
 sg10
 I1

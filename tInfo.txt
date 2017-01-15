@@ -25,7 +25,7 @@ m Andy Murray return 0
 m Novak Djokovic defense 0
 m Stan Wawrinka mind 0
 m Rafael Nadal mind 1
-m Jo-Wilfred Tsonga serve 1
+m Jo-Wilfried Tsonga serve 1
 
 Jack
 m John Isner serve 0
