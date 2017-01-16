@@ -193,7 +193,7 @@ def updateLeague(tourneyDay,todayDate = None):
 
 			benchPlayer.history.append((todayDate,'(' + str(pointsEarned) + ')'))
 
-	sorted(tourneyData, key=lambda player: player.total)
+	tourneyData.sort(key=lambda fPlayer: -1 * fPlayer.total)
 
 	pickle.dump( tourneyData, open( "playerInfo.p", "wb" ) )
 	wd.quit()
