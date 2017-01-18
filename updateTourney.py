@@ -15,12 +15,12 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 ## maybe this should be broken up later ##
 
 
-def getPoints(name, attribute,	order, statNames, pageSource):
-	soup = BeautifulSoup(pageSource, "lxml")
+def getPoints(name, attribute,	order, statNames, soup):
+	
 
 	if attribute == 1:
-		print soup.find('div', {'id': statNames[0] + order}).text
-		print statNames[0] + order
+		#print soup.find('div', {'id': statNames[0] + order}).text
+		#print statNames[0] + order
 		aces = int(soup.find('div', {'id': statNames[0] + order}).text)
 		dfs = int(soup.find('div', {'id': statNames[1] + order}).text)
 		return 3 *(aces - dfs)
@@ -31,12 +31,12 @@ def getPoints(name, attribute,	order, statNames, pageSource):
 		return 2 * winners - ues
 
 	elif attribute == 3:
-		print soup.find('div', {'id': statNames[5] + order}).text
+		#print soup.find('div', {'id': statNames[5] + order}).text
 		return int(soup.find('div', {'id': statNames[5] + order}).text.split('(')[1].split('%')[0])
 
 	elif attribute == 4:
-		print soup.find('div', {'id': statNames[4] + order}).text
-		print statNames[4] + order
+		#print soup.find('div', {'id': statNames[4] + order}).text
+		#print statNames[4] + order
 		return int(soup.find('div', {'id': statNames[4] + order}).text.split('(')[1].split('%')[0])
 		
 
@@ -86,20 +86,25 @@ def updateLeague(tourneyDay,todayDate = None):
 	page = requests.get(urlStr)
 	tree = html.fromstring(page.content)
 
-	players = tree.xpath('//*[@id="crtcontent"]/div/div[1]/a/text()')
+	
+	players = tree.xpath('//*[@class="name singles"]/a/text()')
 
 
-	links = tree.xpath('//*[@id="results"]/div/div[4]/div/a/@href')
+	links = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[4]/div/a/@href')
 
 	pointsEarned = 0
+
+	wd = webdriver.Firefox()
+
 
 	neededStats = ["aces_p", "double_faults_p", "winners_p", 
 		"unforced_errors_p", "second_srv_pts_won_p", "rec_pts_won_p",
 			"brk_pts_won_p"]
 
-	wd = webdriver.Firefox()
+	
 
 	orderBool = '1'
+	orderName = ''
 	for user in tourneyData:
 
 		for player in user.team:
@@ -118,14 +123,26 @@ def updateLeague(tourneyDay,todayDate = None):
 
 				if playerIndex % 2 == 0:
 					orderBool = '1'
+					orderName = 'One'
 				else:
 					orderBool = '2'
+					orderName = 'Two'
 
 				wd.get("https://www.ausopen.com" + links[playerIndex / 2])
 
 				time.sleep(5)
 
-				pointsEarned = getPoints(player.name, player.attribute,	orderBool, neededStats, wd.page_source)
+				soup = BeautifulSoup(wd.page_source, "lxml")
+
+				pointsEarned = getPoints(player.name, player.attribute,	orderBool, neededStats, soup)
+
+				#print str(soup.find('div', {'class': 'teaminfo team' + orderName }).contents[2])
+				if "crticon winner" not in str(soup.find('div', {'class': 'teaminfo team' + orderName }).contents[2]):
+					#print soup.find('div', {'class': 'teaminfo team' + orderName })
+					player.alive = 0
+					print player.name, ' here'
+
+
 
 			# elif player.name in losers:
 
@@ -169,14 +186,22 @@ def updateLeague(tourneyDay,todayDate = None):
 
 				if playerIndex % 2 == 0:
 					orderBool = '1'
+					orderName = 'One'
 				else:
 					orderBool = '2'
+					orderName = 'Two'
 
 				wd.get("https://www.ausopen.com" + links[playerIndex / 2])
 
 				time.sleep(5)
 
-				pointsEarned = getPoints(benchPlayer.name, benchPlayer.attribute,	orderBool, neededStats, wd.page_source)
+				soup = BeautifulSoup(wd.page_source, "lxml")
+
+				pointsEarned = getPoints(benchPlayer.name, benchPlayer.attribute,	orderBool, neededStats,  soup)
+
+				if "crticon winner" not in str(soup.find('div', {'class': 'teaminfo team' + orderName }).contents[2]):
+					benchPlayer.alive = 0
+					print benchPlayer.name, ' here'
 
 			else:
 				dailyStatus = "DNP"
@@ -194,6 +219,8 @@ def updateLeague(tourneyDay,todayDate = None):
 			benchPlayer.history.append((todayDate,'(' + str(pointsEarned) + ')'))
 
 	tourneyData.sort(key=lambda fPlayer: -1 * fPlayer.total)
+
+	return
 
 	pickle.dump( tourneyData, open( "playerInfo.p", "wb" ) )
 	wd.quit()
