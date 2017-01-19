@@ -27,7 +27,12 @@
   			<tr><td><a href= {{ person.name }} >{{ person.name }}</a></td>
 
   			{% for player in person.team %}
-  				<td>{{ player.name }}</td>
+  				{% if player.alive|int() == 0 %}
+          			<td><strike>{{ player.name }}</strike></td>
+        		{% endif %}
+        		{% if player.alive|int() == 1 %}
+          			<td>{{ player.name }}</td>
+        		{% endif %}
   			{% endfor %}
 
   			</tr><td>  </td>
