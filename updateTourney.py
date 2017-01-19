@@ -220,7 +220,7 @@ def updateLeague(tourneyDay,todayDate = None):
 
 	tourneyData.sort(key=lambda fPlayer: -1 * fPlayer.total)
 
-	return
+	
 
 	pickle.dump( tourneyData, open( "playerInfo.p", "wb" ) )
 	wd.quit()
