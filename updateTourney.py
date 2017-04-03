@@ -87,7 +87,7 @@ def updateLeague(tourneyDay,todayDate = None):
 	tree = html.fromstring(page.content)
 
 	
-	players = tree.xpath('//*[@class="name singles"]/a/text()')
+	players = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[3]/div/div[1]/a/text()')
 
 
 	links = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[4]/div/a/@href')
@@ -127,6 +127,8 @@ def updateLeague(tourneyDay,todayDate = None):
 				else:
 					orderBool = '2'
 					orderName = 'Two'
+
+				print playerIndex, len(links)
 
 				wd.get("https://www.ausopen.com" + links[playerIndex / 2])
 
@@ -220,7 +222,7 @@ def updateLeague(tourneyDay,todayDate = None):
 
 	tourneyData.sort(key=lambda fPlayer: -1 * fPlayer.total)
 
-	
+
 
 	pickle.dump( tourneyData, open( "playerInfo.p", "wb" ) )
 	wd.quit()
