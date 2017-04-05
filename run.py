@@ -4,16 +4,19 @@ import substitute as sub
 import os
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
 	if not session.get('logged_in'):
 		return render_template('login.html')
 	else:
-		users = pickle.load(open("playerInfo.p", "rb")) 
+		users = pickle.load(open("playerInfo.p", "rb"))
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
 def teamPage(username):
+    if not session.get('logged_in'):
+        return render_template('login.html')
 	users = pickle.load(open("playerInfo.p", "rb"))
 	for user in users:
 		if username == user.name:
@@ -23,6 +26,8 @@ def teamPage(username):
 
 @app.route('/<username>', methods=['GET', 'POST'])
 def subPlayers(username):
+    if not session.get('logged_in'):
+        return render_template('login.html')
 	playerName = request.form.get("bench",None)
 	if playerName == None:
 		users = pickle.load(open("playerInfo.p", "rb"))
@@ -35,7 +40,7 @@ def subPlayers(username):
 			for player in user.team:
 
 				if player.name == playerName and player.attribute == attrMap[playerAttr]:
-					return render_template('ben.html', user=user, teamName = username) 
+					return render_template('ben.html', user=user, teamName = username)
 
 		for user in users:
 			if user.name == username:
