@@ -137,13 +137,15 @@
 
       <!--Bench Buttons Here-->
 
-      {% for player in user.bench %}
-      <td>
-    	 <form action={{ teamName }} method="post">
-          <button type="submit" name="bench" value= "{{ player.name }}">Add</button>
-      </form>
-    	</td>
-      {% endfor %}
+      <!--{% if teamName == sessionUser %}-->
+        {% for player in user.bench %}
+        <td>
+    	      <form action={{ teamName }} method="post">
+            <button type="submit" name="bench" value= "{{ player.name }}">Add</button>
+            </form>
+    	  </td>
+        {% endfor %}
+      <!--{% endif %}-->
 
       </tr>	
 
