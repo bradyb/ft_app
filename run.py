@@ -20,7 +20,7 @@ def home():
 def teamPage(username):
 
 	if not session.get('logged_in'):
-		return home()
+		return redirect(url_for('home'))
 	users = pickle.load(open("playerInfo.p", "rb"))
 
 	for user in users:
@@ -29,31 +29,42 @@ def teamPage(username):
 	return 'error'
 
 
-@app.route('/<username>', methods=['GET', 'POST'])
-def subPlayers(username):
-    if not session.get('logged_in'):
-        return home()
+@app.route('/<username>/bench', methods=['POST'])
+def benchPlayers(username):
+	if not session.get('logged_in'):
+		return home()
 	playerName = request.form.get("bench",None)
 	if playerName == None:
-		users = pickle.load(open("playerInfo.p", "rb"))
-		attrMap = pickle.load(open("attrMap.p", "rb"))
-		playerName = request.form.get("subbed-player-name",None)
-		playerAttr = request.form.get("subbed-player-attr",None)
+		return 'error'
+	
+	user = sub.moveFromBench(playerName,username)
+	return redirect(url_for('teamPage', username=username))
+	
 
-		for user in users:
-			for player in user.team:
-				if player.name == playerName and player.attribute == attrMap[playerAttr]:
-					return render_template('ben.html', user=user, teamName = username)
+@app.route('/<username>/sub', methods=['POST'])
+def subPlayers(username):
+	if not session.get('logged_in'):
+		return home()
 
-		for user in users:
-			if user.name == username:
-				user.addPickUp(playerName,'m',attrMap[playerAttr])
-				pickle.dump( users, open( "playerInfo.p", "wb" ) )
-				return render_template('ben.html', user=user, teamName = username)
-	else:
-		user = sub.moveFromBench(playerName,username)
-		return render_template('ben.html', user=user, teamName=username, )
+	users = pickle.load(open("playerInfo.p", "rb"))
+	attrMap = pickle.load(open("attrMap.p", "rb"))
+	playerName = request.form.get("subbed-player-name",None)
+	playerAttr = request.form.get("subbed-player-attr",None)
+
+	for user in users:
+		for player in user.team:
+			if player.name == playerName and player.attribute == attrMap[playerAttr]:
+				return redirect(url_for('teamPage', username=username))
+
+	for user in users:
+		if user.name == username:
+			user.addPickUp(playerName,'m',attrMap[playerAttr])
+			pickle.dump( users, open( "playerInfo.p", "wb" ) )
+			return redirect(url_for('teamPage', username=username))
+
 	return 'error'
+
+
 
 @app.route("/login", methods=['POST'])
 def login():

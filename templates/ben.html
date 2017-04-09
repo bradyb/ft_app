@@ -95,17 +95,17 @@
         
       {% endfor %}
 
-      <!--{% if user.bench|length < 3 %}
+      {% if user.bench|length < 3 %}
 
       <td>
-       <form action="/Ben" method="post">
+       <form action={{ teamName + "/sub" }} method="post">
           <input type="text" name="subbed-player-name" value="Sub Name" />
           <input type="text" name="subbed-player-attr" value="Sub Attribute" />
           <button type="submit">Submit</button>
        </form>
       </td>
 
-      {% endif %}-->
+      {% endif %}
 
 
 
@@ -135,17 +135,15 @@
         <td> </td>
       {% endfor %}
 
-      <!--Bench Buttons Here-->
-
-      <!--{% if teamName == sessionUser %}-->
-        {% for player in user.bench %}
+      
+      {% for player in user.bench %}
         <td>
-    	      <form action={{ teamName }} method="post">
+    	      <form action={{ teamName + "/bench" }}  method="post">
             <button type="submit" name="bench" value= "{{ player.name }}">Add</button>
             </form>
     	  </td>
-        {% endfor %}
-      <!--{% endif %}-->
+      {% endfor %}
+      
 
       </tr>	
 
