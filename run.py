@@ -78,6 +78,7 @@ def login():
 	s = Session()
 	query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
 	result = query.first()
+	#check to see if this user is in the database
 	if result:
 		session['logged_in'] = True
 		session['username'] = POST_USERNAME
