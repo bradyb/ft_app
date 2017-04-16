@@ -48,6 +48,7 @@ def initTourney():
 	Session = sessionmaker(bind=engine)
 	session = Session()
 
+	teamsList = list()
 	playerList = list()
 
 	for i in range(0, numPlayers):
@@ -60,16 +61,21 @@ def initTourney():
 
 			lineData = curLine.split(' ')
 
-			playerList.append(Teams(username, lineData[1] + " " + lineData[2], attrMap[lineData[3]] , int(lineData[4])))
+			teamsList.append(Teams(username, lineData[1] + " " + lineData[2], attrMap[lineData[3]] , int(lineData[4])))
 
+			if (lineData[1] + " " + lineData[2]) not in playerList:
+				
+				playerList.append(lineData[1] + " " + lineData[2])
 
 	
-	session.add_all(playerList)
+	session.add_all(teamsList)
 
 	# commit the record the database
 	session.commit()
  
 	session.commit()
+
+	pickle.dump( playerList, open( "playerList_" + tourneyName + ".p", "wb" ) )
 
 
 if __name__ == "__main__":
