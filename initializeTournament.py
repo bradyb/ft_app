@@ -65,7 +65,7 @@ def initTourney():
 
 			if (lineData[1] + " " + lineData[2]) not in playerList:
 				
-				playerList.append(lineData[1] + " " + lineData[2])
+				playerList.append([lineData[1] + " " + lineData[2], 1])
 
 	
 	session.add_all(teamsList)
