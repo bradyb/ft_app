@@ -44,12 +44,10 @@ def getAllStats(name, order, statNames, soup, date):
 	session.add(playerObj)
 	session.commit()
 
-def updatePlayersTable(tourneyName):
+def updatePlayersTable(tourneyName, tourneyDay):
 
-	if todayDate == None:
-		today = datetime.datetime.now()
-		todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
-
+	today = datetime.datetime.now()
+	todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
 
 	baseURL = "http://www.ausopen.com/en_AU/scores/completed_matches/day"
 
@@ -124,17 +122,28 @@ def updateUsersTable(date):
 
 		for player in team_query:
 
-			playerObj = session.query(players).filter_by(name=player.player_name,asOfDate = date).first()
+			playerStats = session.query(players).filter_by(name=player.player_name,asOfDate = date).first()
 
+			#serve
+			if (player.attribute == 1):
+				datePoints += 3*(playerStats.aces - playerStats.double_faults)
+			#power
+			elif (player.attribute == 2):
+				datePoints += 2*playerStats.winners - playerStats.unforced_errors
+			#return
+			elif (player.attribute == 3):
+				datePoints += playerStats.receive_percent
+			#defense
+			elif (player.attribute == 4):
+				datePoints += playerStats.second_srv_percent
+			#mind
+			elif (player.attribute == 5):
+				datePoints += 5*(playerStats.bps - playerStats.bpl + playerStats.bpc) - 3 * playerStats.bpl
 
-			##compute the points for this player and add it to datePoints
 
 		user.totalPoints += datePoints
 
 		session.commit()
-
-
-
 
 	session.commit()
 
