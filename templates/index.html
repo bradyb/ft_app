@@ -15,27 +15,28 @@
 		<table>
   		<tr>
     		<th>Player</th>
-   			<th>Serve</th> 
+   			<!--<th>Serve</th> 
     		<th>Power</th>
     		<th>Return</th>
     		<th>Defense</th>
-    		<th>Mind</th>
+    		<th>Mind</th>-->
     		<th>Total</th>
   		</tr> 
   		
   		{% for person in users %}
-  			<tr><td><a href= {{ person.name }} >{{ person.name }}</a></td>
+  			<tr><td><a href= {{ person.username }} >{{ person.username }}</a></td>
 
-  			{% for player in person.team %}
+  			<!--{% for player in person.team %}
   				{% if player.alive|int() == 0 %}
           			<td><strike>{{ player.name }}</strike></td>
         		{% endif %}
         		{% if player.alive|int() == 1 %}
           			<td>{{ player.name }}</td>
         		{% endif %}
-  			{% endfor %}
-
-  			</tr><td>  </td>
+  			{% endfor %}-->
+        <td>{{ person.totalPoints }}</td>
+  			</tr>
+        <!--<td>  </td>
 
   			{% for player in person.team %}
   				<td>{{ player.points }}</td>
@@ -44,7 +45,7 @@
 
   			<td>{{ person.total }}</td>
 
-  			</tr>
+  			</tr>-->
   			
   			
   		{% endfor %}		
