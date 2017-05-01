@@ -1,5 +1,5 @@
 TODO List
-1. Change the subbing logic to incorporate the backend changes
-2. Change the displaying of the tournament data from the database
+1. Change the displaying of the tournament data from the database
+2. Change the subbing logic to incorporate the backend changes
 3. Cache session data?
 4. Security certificate for https.

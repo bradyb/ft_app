@@ -14,7 +14,11 @@ def home():
 	if not session.get('logged_in'):
 		return render_template('login.html')
 	else:
-		users = pickle.load(open("playerInfo.p", "rb"))
+		Session = sessionmaker(bind=engine)
+		s = Session()
+
+		users = s.query(Users)
+		users.sort(key=lambda User: -1 * User.totalPoints)
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
