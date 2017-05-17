@@ -3,11 +3,11 @@ from playerTypes import fPlayer, tPlayer
 import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from tabledef import *
+from tableBuilder import *
 
 def initTourney():
 
-	tourneyName = raw_data("Tourney name: ")
+	tourneyName = raw_input("Tourney name: ")
 
 	# maps attribute names to their corresponding integer
 	# are there enums in python?
@@ -61,11 +61,15 @@ def initTourney():
 
 			lineData = curLine.split(' ')
 
+			print lineData
+
 			teamsList.append(Teams(username, lineData[1] + " " + lineData[2], attrMap[lineData[3]] , int(lineData[4])))
 
 			if (lineData[1] + " " + lineData[2]) not in playerList:
 				
 				playerList.append([lineData[1] + " " + lineData[2], 1])
+
+		tourneyFile.readline()	
 
 	
 	session.add_all(teamsList)
