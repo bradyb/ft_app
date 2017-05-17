@@ -19,8 +19,8 @@ def home():
 		Session = sessionmaker(bind=engine)
 		s = Session()
 
-		users = s.query(Users)
-		users.sort(key=lambda User: -1 * User.totalPoints)
+		users = s.query(User)
+		#users.sort(key=lambda User: -1 * User.totalPoints)
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
