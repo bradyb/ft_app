@@ -4,8 +4,10 @@ import substitute as sub
 import os
 from sqlalchemy.orm import sessionmaker
 from tableBuilder import *
+from flask_sslify import SSLify
 engine = create_engine('sqlite:///testfrench2017.db', echo=True)
 app = Flask(__name__)
+sslify = SSLify(app)
 app.secret_key = os.urandom(12)
 
 
