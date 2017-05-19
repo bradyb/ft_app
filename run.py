@@ -21,6 +21,8 @@ def home():
 
 		users = s.query(User)
 		#users.sort(key=lambda User: -1 * User.totalPoints)
+		for person in users:
+			print person.totalPoints
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
