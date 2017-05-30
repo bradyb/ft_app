@@ -26,7 +26,7 @@ class players(Base):
 
     #----------------------------------------------------------------------
     def __init__(self, name, date, aces, double_faults, 
-                        winners, unforced_errors, second_srv_percent, receive_percent, bps, bpl, bpc):
+                        winners, unforced_errors, second_srv_percent, receive_percent, bps, bpc, bpl):
         """"""
         self.name = name
         self.date = date

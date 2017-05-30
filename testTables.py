@@ -14,10 +14,10 @@ def checkContentsOfTable(tableName):
 		Session = sessionmaker(bind=engine)
 		session = Session()
 
-		query = session.query(Teams)
+		query = session.query(User)
 
 		for result in query:
-			print result.username, result.player_name, result.attribute, result.benched
+			print result.username, result.totalPoints
 
 
 

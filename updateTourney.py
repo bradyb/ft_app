@@ -11,11 +11,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from tableBuilder import *
 
-## maybe this should be broken up later ##
 
-
-def getAllStats(name, order, statNames, soup, date):
+def getAllStats(name, order, statNames, soup, session, date):
 
 	aces = int(soup.find('div', {'id': statNames[0] + order}).text)
 	dfs = int(soup.find('div', {'id': statNames[1] + order}).text)
@@ -30,16 +31,16 @@ def getAllStats(name, order, statNames, soup, date):
 
 	if order == '1':
 		bpc = int(soup.find('div', {'id': statNames[6] + order}).text.split('/')[0])
-		bps = int(soup.find('div', {'id': statNames[6] + '2'}).text.split('/')[1].split(' ')[0])
+		bp_against = int(soup.find('div', {'id': statNames[6] + '2'}).text.split('/')[1].split(' ')[0])
 		bpl = int(soup.find('div', {'id': statNames[6] + '2'}).text.split('/')[0])
 
 		
 	else:
 		bpc = int(soup.find('div', {'id': statNames[6] + order}).text.split('/')[0])
-		bps = int(soup.find('div', {'id': statNames[6] + '1'}).text.split('/')[1].split(' ')[0])
+		bp_against = int(soup.find('div', {'id': statNames[6] + '1'}).text.split('/')[1].split(' ')[0])
 		bpl = int(soup.find('div', {'id': statNames[6] + '1'}).text.split('/')[0])
 
-	playerObj = players(name, date, aces, dfs, winners, ues, defense, returns, bps, bpc, bpl)
+	playerObj = players(name, date, aces, dfs, winners, ues, defense, returns, bp_against - bpl, bpc, bpl)
 
 	session.add(playerObj)
 	session.commit()
@@ -81,6 +82,10 @@ def updatePlayersTable(tourneyDay,tourneyName = None):
 	Session = sessionmaker(bind=engine)
 	session = Session()
 
+	neededStats = ["aces_p", "double_faults_p", "winners_p", 
+		"unforced_errors_p", "second_srv_pts_won_p", "rec_pts_won_p",
+			"brk_pts_won_p"]
+
 	#player is of the form [playerName, alive]
 	for player in playerList:
 
@@ -101,17 +106,20 @@ def updatePlayersTable(tourneyDay,tourneyName = None):
 			else:
 				orderBool = '2'
 				orderName = 'Two'
+			#Australian Open
+			#wd.get("https://www.ausopen.com" + links[playerIndex / 2])
 
-			wd.get("https://www.ausopen.com" + links[playerIndex / 2])
+			#French Open
+			wd.get("https://www.rolandgarros.com" + links[playerIndex / 2])
 
 			time.sleep(5)
 
 			soup = BeautifulSoup(wd.page_source, "lxml")
 
-			pointsEarned = getAllStats(player[0], orderBool, neededStats, soup, session)
+			getAllStats(player[0], orderBool, neededStats, soup, session, todayDate)
 
-			if "crticon winner" not in str(soup.find('div', {'class': 'teaminfo team' + orderName }).contents[2]):
-				player[1] = 0
+			#if "crticon winner" not in str(soup.find('div', {'class': 'teaminfo team' + orderName }).contents[2]):
+			#	player[1] = 0
 
 	session.commit()
 
@@ -134,23 +142,28 @@ def updateUsersTable(date):
 
 		for player in team_query:
 
-			playerStats = session.query(players).filter_by(name=player.player_name,asOfDate = date).first()
+			playerStats = session.query(players).filter_by(name = player.player_name, date = date).first()
 
-			#serve
-			if (player.attribute == 1):
-				datePoints += 3*(playerStats.aces - playerStats.double_faults)
-			#power
-			elif (player.attribute == 2):
-				datePoints += 2*playerStats.winners - playerStats.unforced_errors
-			#return
-			elif (player.attribute == 3):
-				datePoints += playerStats.receive_percent
-			#defense
-			elif (player.attribute == 4):
-				datePoints += playerStats.second_srv_percent
-			#mind
-			elif (player.attribute == 5):
-				datePoints += 5*(playerStats.bps - playerStats.bpl + playerStats.bpc) - 3 * playerStats.bpl
+			#this really shouldn't be a for loop
+			if playerStats:
+				print player.player_name, player.attribute
+				print playerStats.name, playerStats.bps, playerStats.bpc, playerStats.bpl
+				#serve
+				if (player.attribute == 1):
+					datePoints += 3*(playerStats.aces - playerStats.double_faults)
+				#power
+				elif (player.attribute == 2):
+					datePoints += 2*playerStats.winners - playerStats.unforced_errors
+				#return
+				elif (player.attribute == 3):
+					datePoints += playerStats.receive_percent
+				#defense
+				elif (player.attribute == 4):
+					datePoints += playerStats.second_srv_percent
+				#mind
+				elif (player.attribute == 5):
+					print playerStats.bps + playerStats.bpc, playerStats.bpl
+					datePoints += 5*(playerStats.bps + playerStats.bpc) - 3 * playerStats.bpl
 
 
 		user.totalPoints += datePoints
@@ -163,5 +176,7 @@ def updateUsersTable(date):
 
 if __name__ == "__main__":
 	date = raw_input('Enter the tournament day: ')
-	updatePlayersTable(date)
+	updatePlayersTable(date, 'french2017')
+	updateUsersTable('5/30/2017')
+
 
