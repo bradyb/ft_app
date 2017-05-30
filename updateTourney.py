@@ -44,21 +44,33 @@ def getAllStats(name, order, statNames, soup, date):
 	session.add(playerObj)
 	session.commit()
 
-def updatePlayersTable(tourneyName, tourneyDay):
+def updatePlayersTable(tourneyDay,tourneyName = None):
 
 	today = datetime.datetime.now()
 	todayDate =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
 
-	baseURL = "http://www.ausopen.com/en_AU/scores/completed_matches/day"
+	#Australian Open
+	#baseURL = "http://www.ausopen.com/en_AU/scores/completed_matches/day"
+	
+	#French Open
+	baseURL = "http://www.rolandgarros.com/en_FR/scores/completed_matches/day"
 
 	urlStr = baseURL + tourneyDay + ".html"
 
 	page = requests.get(urlStr)
 	tree = html.fromstring(page.content)
 
-	players = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[3]/div/div[1]/a/text()')
+	#Australian Open
+	#players = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[3]/div/div[1]/a/text()')
 
-	links = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[4]/div/a/@href')
+	#French Open
+	players = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div/div[2]/div[1]/div/div[1]/a/text()')
+
+	#Australian Open
+	#links = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div[4]/div/a/@href')
+
+	#French Open
+	links = tree.xpath('//div[contains(@data-event, "MS") or contains(@data-event ,"WS")]/div/div[2]/div[3]/div/a/@href')
 
 	wd = webdriver.Firefox()
 
@@ -151,5 +163,5 @@ def updateUsersTable(date):
 
 if __name__ == "__main__":
 	date = raw_input('Enter the tournament day: ')
-	updateLeague(date)
+	updatePlayersTable(date)
 
