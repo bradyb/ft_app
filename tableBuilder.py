@@ -62,6 +62,7 @@ class Teams(Base):
     player_name = Column(String, primary_key=True)
     attribute = Column(Integer)
     benched = Column(Integer)
+    alive = Column(Integer)
 
     def __init__(self, username, player_name, attribute, benched):
 
@@ -69,6 +70,7 @@ class Teams(Base):
         self.player_name = player_name
         self.attribute = attribute
         self.benched = benched
+        self.alive = 1
 
  
 # create tables

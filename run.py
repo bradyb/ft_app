@@ -19,10 +19,7 @@ def home():
 		Session = sessionmaker(bind=engine)
 		s = Session()
 
-		users = s.query(User)
-		#users.sort(key=lambda User: -1 * User.totalPoints)
-		for person in users:
-			print person.totalPoints
+		users = s.query(User).order_by(desc(User.totalPoints))
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
@@ -30,13 +27,30 @@ def teamPage(username, location=None):
 
 	if not session.get('logged_in'):
 		return redirect(url_for('home'))
-	users = pickle.load(open("playerInfo.p", "rb"))
 
-	for user in users:
-		if username == user.name:
-			#if (location !=  None):
-			#	return render_template('ben.html#'+location, user=user, teamName = username, sessionUser=session.get('username'))
-			return render_template('ben.html', user=user, teamName = username, sessionUser=session.get('username'))
+	Session = sessionmaker(bind=engine)
+	s = Session()
+	
+	team_query = s.query(Teams).filter_by(username = username, benched = 0)
+	bench_query = s.query(Teams).filter_by(username = username, benched = 1)
+
+	teamList = [None]*5
+	benchList = list()
+
+	for player in team_query:
+
+		teamList[player.attribute - 1] = [player.player_name, player.alive]		
+			
+	# for player in bench_query:
+
+	# 	benchList.append([])
+
+	# if (location !=  None):
+
+	# 	return render_template('ben.html#'+location, user=user, teamName = username, sessionUser=session.get('username'))
+
+	return render_template('ben.html', teamList=teamList, teamName = username, sessionUser=session.get('username'))
+
 	return 'error'
 
 
