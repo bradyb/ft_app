@@ -15,6 +15,35 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from tableBuilder import *
 
+def getAttributeScore(stat_line, attribute):
+	## Serve
+	if attribute == 1:
+		return 3*(stat_line.aces - stat_line.double_faults)
+	## Power
+	if attribute == 2:
+		return 2*stat_line.winners - stat_line.unforced_errors
+	## Return
+	if attribute == 3:
+		return stat_line.receive_percent
+	## Defense
+	if attribute == 4:
+		return stat_line.second_srv_percent
+	## Mind
+	if attribute == 5:
+		return 5*(stat_line.bps + stat_line.bpc) - 3 * stat_line.bpl
+
+
+## Returns the players scores sorted by date
+def getDailyStatsList(player_query, attribute):
+	stat_list = list()
+	for stat_line in player_query:
+		stat_list.append([stat_line.date, getAttributeScore(stat_line, attribute)])
+
+	return stat_list.sort(key=lambda x: x[0])
+
+
+
+
 
 def getAllStats(name, order, statNames, soup, session, date):
 
@@ -98,7 +127,14 @@ def updatePlayersTable(tourneyDay,tourneyName = None):
 
 		if shortName in players:
 
-			playerIndex = players.index(shortName)
+			playerIndex = players.index(shortName) if shortName in players else -1
+
+			if playerIndex == -1:
+				playerObj = players(player[0], todayDate, -1, -1, -1, 
+					-1, -1, -1, -1, -1, -1)
+				session.add(playerObj)
+				session.commit()
+				continue
 
 			if playerIndex % 2 == 0:
 				orderBool = '1'

@@ -52,6 +52,7 @@ def teamPage(username, location=None):
 
 	for player in team_query:
 
+		player_stats = s.query(players).filter_by(name = player.player_name).first()
 		teamList[player.attribute - 1] = [player, player.alive]
 
 	for bench_player in bench_query:
