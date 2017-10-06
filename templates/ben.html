@@ -1,52 +1,65 @@
 <!DOCTYPE html> 
-	<html>
-	<head>
-		<title>Team | {{ teamName }}</title>
-		<link rel="stylesheet"  href="static/css/tennis.css">
-	</head>
+<html>
+<head>
+  <title>Team | {{ teamName }}</title>
+  <link rel="stylesheet"  href="static/css/tennis.css">
+</head>
 
-	<body>
-		<header id="header">
-				 <h1>{{ teamName }}'s Team</h1>
-		</header>
-		 <div id= 'main' style = "text-align: center;">
-		  <div style="display: inline-block; text-align: left; max-width: 60%;">
-		<table id="scores">
-  		<tr>
-  			<th>Date</th>
-    		<th>Serve</th> 
-    		<th>Power</th>
-    		<th>Return</th>
-    		<th>Defense</th>
-    		<th>Mind</th>
-    		<th>Bench</th>
-    		<th>Bench</th>
-    		<th>Bench<th>
-    	</tr> 
+<body>
+  <header id="header">
+   <h1>{{ teamName }}'s Team</h1>
+ </header>
+ <div id= 'main' style = "text-align: center;">
+  <div style="display: inline-block; text-align: left; max-width: 60%;">
+    <table id="scores">
       <tr>
+       <th>Date</th>
+       <th>Serve</th> 
+       <th>Power</th>
+       <th>Return</th>
+       <th>Defense</th>
+       <th>Mind</th>
+       {% for player in benchList %}
+         <th>Bench</th>
+       {% endfor %}
+       </tr> 
+       <tr>
 
-      <td><a href= "/" >Back to Home</a></td>
+        <td><a href= "/" >Back to Home</a></td>
 
-      {% for player in teamList %}
-        {% if player[1]|int() == 0 %}
-          <td><strike>{{ player[0] }}</strike></td>
-        {% endif %}
-        {% if player[1]|int() == 1 %}
-          <td>{{ player[0] }}</td>
-        {% endif %}
-      {% endfor %}
+        {% for player in teamList %}
+          {% if player is not none %}
+            {% if player[1]|int() == 0 %}
+              <td><strike>{{ player[0].player_name }}</strike></td>
+            {% endif %}
+            {% if player[1]|int() == 1 %}
+              <td>{{ player[0].player_name }}</td>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% for player in benchList %}
+          {% if player is not none %}
+            {% if player[1]|int() == 0 %}
+              <td><strike>{{ player[0] }}</strike></td>
+            {% endif %}
+            {% if player[1]|int() == 1 %}
+              <td>{{ player[0] }}</td>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </tr>
 
- 	</table>
+    </table>
 
-							<footer>
-    							<ul>
-        							<li><a href="mailto:ben.brady1224@gmail.com">email</a></li>
-        							<li><a href="https://github.com/bradyb">github.com/bradyb</a></li>
-								</ul>
-							</footer>
-							</div>
-							</div>
-									
-							</body>
-							</html> 
+    <footer>
+     <ul>
+       <li><a href="mailto:ben.brady1224@gmail.com">email</a></li>
+       <li><a href="https://github.com/bradyb">github.com/bradyb</a></li>
+     </ul>
+   </footer>
+ </div>
+</div>
+
+</body>
+</html> 
 

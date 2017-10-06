@@ -10,6 +10,19 @@ app = Flask(__name__)
 sslify = SSLify(app)
 app.secret_key = os.urandom(12)
 
+IntToAttributeMap = ["serve", "power", "return", "defense", "mind"]
+
+def debug(text):
+  print text
+  return ''
+
+@app.context_processor
+def utility_functions():
+    def print_in_console(message):
+        print str(message)
+
+    return dict(mdebug=print_in_console)
+
 
 @app.route('/')
 def home():
@@ -32,27 +45,27 @@ def teamPage(username, location=None):
 	s = Session()
 	
 	team_query = s.query(Teams).filter_by(username = username, benched = 0)
-	bench_query = s.query(Teams).filter_by(username = username, benched = 1)
+	bench_query = s.query(Teams).filter_by(username = username, benched = 1).order_by(desc(Teams.attribute))
 
 	teamList = [None]*5
 	benchList = list()
 
 	for player in team_query:
 
-		teamList[player.attribute - 1] = [player.player_name, player.alive]		
+		teamList[player.attribute - 1] = [player, player.alive]
+
+	for bench_player in bench_query:
+
+		benchList.append([bench_player.player_name + " / " + 
+			IntToAttributeMap[bench_player.attribute - 1], bench_player.alive])
 			
-	# for player in bench_query:
+	if (location !=  None):
 
-	# 	benchList.append([])
+		return render_template('ben.html#'+location, teamList=teamList,
+			benchList=benchList, teamName = username, sessionUser=session.get('username'))
 
-	# if (location !=  None):
-
-	# 	return render_template('ben.html#'+location, user=user, teamName = username, sessionUser=session.get('username'))
-
-	return render_template('ben.html', teamList=teamList, teamName = username, sessionUser=session.get('username'))
-
-	return 'error'
-
+	return render_template('ben.html', teamList=teamList, benchList=benchList, 
+		teamName = username, sessionUser=session.get('username'))
 
 @app.route('/<username>/bench', methods=['POST'])
 def benchPlayers(username):
