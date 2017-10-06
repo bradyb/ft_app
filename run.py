@@ -4,6 +4,7 @@ import substitute as sub
 import os
 from sqlalchemy.orm import sessionmaker
 from tableBuilder import *
+import updateTourney as ut
 from flask_sslify import SSLify
 engine = create_engine('sqlite:///testfrench2017.db', echo=True)
 app = Flask(__name__)
@@ -52,11 +53,14 @@ def teamPage(username, location=None):
 
 	for player in team_query:
 
-		player_stats = s.query(players).filter_by(name = player.player_name).first()
+		player_stats = s.query(players).filter_by(name = player.player_name)
+		stats_list = ut.getDailyStatsList(player_stats, player.attribute)
 		teamList[player.attribute - 1] = [player, player.alive]
 
 	for bench_player in bench_query:
 
+		player_stats = s.query(players).filter_by(name = bench_player.player_name)
+		stats_list = ut.getDailyStatsList(player_stats, bench_player.attribute)
 		benchList.append([bench_player.player_name + " / " + 
 			IntToAttributeMap[bench_player.attribute - 1], bench_player.alive])
 			

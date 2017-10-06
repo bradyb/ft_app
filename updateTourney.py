@@ -41,10 +41,6 @@ def getDailyStatsList(player_query, attribute):
 
 	return stat_list.sort(key=lambda x: x[0])
 
-
-
-
-
 def getAllStats(name, order, statNames, soup, session, date):
 
 	aces = int(soup.find('div', {'id': statNames[0] + order}).text)
