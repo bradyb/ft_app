@@ -55,22 +55,24 @@ def teamPage(username, location=None):
 
 		player_stats = s.query(players).filter_by(name = player.player_name)
 		stats_list = ut.getDailyStatsList(player_stats, player.attribute)
-		teamList[player.attribute - 1] = [player, player.alive]
+		teamList[player.attribute - 1] = [player, player.alive, stats_list]
 
 	for bench_player in bench_query:
 
 		player_stats = s.query(players).filter_by(name = bench_player.player_name)
 		stats_list = ut.getDailyStatsList(player_stats, bench_player.attribute)
 		benchList.append([bench_player.player_name + " / " + 
-			IntToAttributeMap[bench_player.attribute - 1], bench_player.alive])
+			IntToAttributeMap[bench_player.attribute - 1], bench_player.alive, stats_list])
 			
+	total_days = len(teamList[0][2])
+
 	if (location !=  None):
 
 		return render_template('ben.html#'+location, teamList=teamList,
-			benchList=benchList, teamName = username, sessionUser=session.get('username'))
+			benchList=benchList, teamName = username, sessionUser=session.get('username'), total_days=total_days)
 
 	return render_template('ben.html', teamList=teamList, benchList=benchList, 
-		teamName = username, sessionUser=session.get('username'))
+		teamName = username, sessionUser=session.get('username'), total_days=total_days)
 
 @app.route('/<username>/bench', methods=['POST'])
 def benchPlayers(username):

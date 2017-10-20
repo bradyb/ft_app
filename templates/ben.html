@@ -49,6 +49,20 @@
         {% endfor %}
       </tr>
 
+      {% for day_num in range(total_days) - 1 %}
+        <tr>
+        <td>{{ teamList[0][2][0] }}</td>
+        {% for player in teamList %}
+          <td>{{ player[2][day_num + 1] }}</td>
+        {% endfor %}
+
+        {% for player in benchList %}
+          <td>{{ player[2][day_num + 1] }}</td>
+        {% endfor %}
+
+        </tr>
+      {% endfor %}
+
     </table>
 
     <footer>
