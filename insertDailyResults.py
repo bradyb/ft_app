@@ -7,14 +7,14 @@ from tabledef import *
 
 def insertDailyResults():
 
-	dailyData = pickle.load(open( "dailyInfo.p", "rb" ))
 
-	date = dailyData.date
 
-	for player in dailyData.activeList:
 
-		# insert the daily info into the players list
-		# make sure you update the active flag
+
+
+
+
+
 
 
 
