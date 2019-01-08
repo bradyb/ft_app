@@ -3,8 +3,8 @@ import cPickle as pickle
 import substitute as sub
 import os
 from sqlalchemy.orm import sessionmaker
-from tableBuilder import *
-engine = create_engine('sqlite:///testfrench2017.db', echo=True)
+from tabledef import *
+engine = create_engine('sqlite:///users.db', echo=True)
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
@@ -77,15 +77,14 @@ def login():
  
 	Session = sessionmaker(bind=engine)
 	s = Session()
-	for instance in s.query(User).order_by(User.username):#.filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
-		print instance.username
-	# result = query.first()
-	# if result:
-	# 	session['logged_in'] = True
-	# 	session['username'] = POST_USERNAME
-	# 	print session['username']
-	# else:
-	# 	flash('wrong password!')
+	query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
+	result = query.first()
+	if result:
+		session['logged_in'] = True
+		session['username'] = POST_USERNAME
+		print session['username']
+	else:
+		flash('wrong password!')
 	return redirect(url_for('home'))
 
 
