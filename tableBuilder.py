@@ -23,6 +23,7 @@ class players(Base):
     bps  = Column(Integer)
     bpl  = Column(Integer)
     bpc  = Column(Integer)
+    alive = Column(Integer)
 
     #----------------------------------------------------------------------
     def __init__(self, name, date, aces, double_faults, 
@@ -45,14 +46,12 @@ class User(Base):
 
     username = Column(String, primary_key=True)
     password = Column(String)
-    totalPoints = Column(Integer)
 
 #----------------------------------------------------------------------
     def __init__(self, username, password):
         """"""
         self.username = username
         self.password = password
-        self.totalPoints = 0
 
 
 class Teams(Base):
