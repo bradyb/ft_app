@@ -6,7 +6,6 @@ from sqlalchemy.orm import sessionmaker
 from tabledef import *
 engine = create_engine('sqlite:///users.db', echo=True)
 app = Flask(__name__)
-app.secret_key = os.urandom(12)
 
 
 @app.route('/')
@@ -95,5 +94,5 @@ def logout():
     return home()
 
 if __name__ == "__main__":
-	app.debug = True
+	app.secret_key = os.urandom(12)
 	app.run()
