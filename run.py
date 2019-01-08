@@ -17,7 +17,7 @@ def home():
 		return render_template('index.html', users=users)
 
 @app.route('/<username>')
-def teamPage(username, location=None):
+def teamPage(username):
 
 	if not session.get('logged_in'):
 		return redirect(url_for('home'))
@@ -25,8 +25,6 @@ def teamPage(username, location=None):
 
 	for user in users:
 		if username == user.name:
-			#if (location !=  None):
-			#	return render_template('ben.html#'+location, user=user, teamName = username, sessionUser=session.get('username'))
 			return render_template('ben.html', user=user, teamName = username, sessionUser=session.get('username'))
 	return 'error'
 
@@ -40,8 +38,7 @@ def benchPlayers(username):
 		return 'error'
 	
 	user = sub.moveFromBench(playerName,username)
-	return redirect(url_for('teamPage', username=username) + "#scores")
-	#return teamPage(username)
+	return redirect(url_for('teamPage', username=username))
 	
 
 @app.route('/<username>/sub', methods=['POST'])
@@ -57,13 +54,13 @@ def subPlayers(username):
 	for user in users:
 		for player in user.team:
 			if player.name == playerName and player.attribute == attrMap[playerAttr]:
-				return redirect(url_for('teamPage', username=username) + "#scores")
+				return redirect(url_for('teamPage', username=username))
 
 	for user in users:
 		if user.name == username:
 			user.addPickUp(playerName,'m',attrMap[playerAttr])
 			pickle.dump( users, open( "playerInfo.p", "wb" ) )
-			return redirect(url_for('teamPage', username=username)+ "#scores")
+			return redirect(url_for('teamPage', username=username))
 
 	return 'error'
 
