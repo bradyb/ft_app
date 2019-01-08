@@ -26,9 +26,7 @@ def teamPage(username, location=None):
 
 	for user in users:
 		if username == user.name:
-			#if (location !=  None):
-			#	return render_template('ben.html#'+location, user=user, teamName = username, sessionUser=session.get('username'))
-			return render_template('ben.html', user=user, teamName = username, sessionUser=session.get('username'))
+			return render_template('team.html', user=user, teamName = username, sessionUser=session.get('username'))
 	return 'error'
 
 
@@ -42,7 +40,6 @@ def benchPlayers(username):
 	
 	user = sub.moveFromBench(playerName,username)
 	return redirect(url_for('teamPage', username=username) + "#scores")
-	#return teamPage(username)
 	
 
 @app.route('/<username>/sub', methods=['POST'])
