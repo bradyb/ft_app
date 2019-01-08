@@ -1,16 +1,12 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 import cPickle as pickle
 import substitute as sub
-import os
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-	if not session.get('logged_in'):
-		return render_template('login.html')
-	else:
-		users = pickle.load(open("playerInfo.p", "rb")) 
-		return render_template('index.html', users=users)
+	users = pickle.load(open("playerInfo.p", "rb")) 
+	return render_template('index.html', users=users)
 
 @app.route('/<username>')
 def teamPage(username):
