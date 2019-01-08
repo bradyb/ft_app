@@ -13,7 +13,7 @@ def teamPage(username):
 	users = pickle.load(open("playerInfo.p", "rb"))
 	for user in users:
 		if username == user.name:
-			return render_template('ben.html', user=user, teamName = username)
+			return render_template('team.html', user=user, teamName = username)
 	return 'error'
 
 
@@ -31,16 +31,16 @@ def subPlayers(username):
 			for player in user.team:
 
 				if player.name == playerName and player.attribute == attrMap[playerAttr]:
-					return render_template('ben.html', user=user, teamName = username) 
+					return render_template('team.html', user=user, teamName = username) 
 
 		for user in users:
 			if user.name == username:
 				user.addPickUp(playerName,'m',attrMap[playerAttr])
 				pickle.dump( users, open( "playerInfo.p", "wb" ) )
-				return render_template('ben.html', user=user, teamName = username)
+				return render_template('team.html', user=user, teamName = username)
 	else:
 		user = sub.moveFromBench(playerName,username)
-		return render_template('ben.html', user=user, teamName=username)
+		return render_template('team.html', user=user, teamName=username)
 	return 'error'
 
 
