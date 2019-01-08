@@ -27,19 +27,19 @@ class players(Base):
 
     #----------------------------------------------------------------------
     def __init__(self, name, date, aces, double_faults, 
-                        winners, unforced_errors, second_srv_percent, receive_percent, bps, bpl, bpc):
+                        winners, second_srv_percent, receive_percent, bps, bpl, bpc):
         """"""
         self.name = name
         self.date = date
         self.aces = aces
         self.double_faults = double_faults
         self.winners = winners
-        self.unforced_errors = unforced_errors
         self.second_srv_percent = second_srv_percent
         self.receive_percent = receive_percent
         self.bps = bps
         self.bpc = bpc
         self.bpl = bpl
+        self.alive = 1
 
 class User(Base):
     __tablename__ = "users"
