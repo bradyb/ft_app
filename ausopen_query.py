@@ -6,8 +6,7 @@ import requests
 def GetDayResults():
 	response = requests.get(constants.GET_RESULTS_URL, 
 							headers=constants.GET_RESULTS_HEADER)
-	return [ match['match_id'].encode("utf-8") 
-				for match in response.json()['matches']]
+	return response.json()['matches']
 
 def GetMatch():
 	response = requests.get(constants.GET_MATCH_URL, 
