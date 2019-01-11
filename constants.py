@@ -24,3 +24,5 @@ GET_MATCH_HEADER = {
 }
 
 GET_MATCH_URL = 'https://prod-scores-api.ausopen.com/match-centre/PS120'
+
+GET_MATCH_URL_PREFIX = 'https://prod-scores-api.ausopen.com/match-centre/'

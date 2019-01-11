@@ -9,6 +9,7 @@ class tPlayer:
 		self.points = 0
 		self.alive = 1
 		self.history = list()
+
 		
 ## fPlayer = fantasy player##
 
@@ -30,3 +31,5 @@ class fPlayer:
 		for counter in range(0, daysOfPlay):
 
 			self.bench[-1].history.append(("0/0/0",'(-)'))
+
+	
