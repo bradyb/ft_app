@@ -7,7 +7,7 @@ def CreateGetMatchUrl(match_id):
 	return constants.GET_MATCH_URL_PREFIX + str(match_id)
 
 def GetDayResults(day):
-	response = requests.get(constants.GET_RESULTS_URL, 
+	response = requests.get(constants.GET_RESULTS_URL,
 							headers=constants.GET_RESULTS_HEADER)
 	return response.json()['matches']
 
@@ -38,7 +38,19 @@ def GetMatch(url):
 
 def GetMatchStats(match_dict):
 	"""Input must be the result of GetMatch"""
-	return match_dict['stats']['key_stats'][0]['sets'][-1]
+	raw_stats = match_dict['stats']['key_stats'][0]['sets'][-1]['stats']
+	formatted_stats = {}
+	for stat in raw_stats:
+	    if stat['name'] == 'Break points won':
+	        a_breaks_won = int(stat['teamA']['secondary'].split('/')[0])
+	        b_breaks_won = int(stat['teamB']['secondary'].split('/')[0])
+	        formatted_stats['Break points won'] = [a_breaks_won, b_breaks_won]
+	        a_breaks_total = int(stat['teamA']['secondary'].split('/')[1]) if formatted_stats['Break points won'][0] else 0
+	        b_breaks_total = int(stat['teamB']['secondary'].split('/')[1]) if formatted_stats['Break points won'][1] else 0
+	        formatted_stats['Break points saved'] = [b_breaks_total - b_breaks_won, a_breaks_total - a_breaks_won]
+	        continue
+	    formatted_stats[stat['name']] = [int(stat['teamA']['primary']), int(stat['teamB']['primary'])]
+	return formatted_stats
 
 def GetMatchPlayerNames(match_dict):
 	"""Input must be the result of GetMatch"""
