@@ -1,46 +1,46 @@
 5
 
 Ben
-m Nick Kyrgios serve 0
-m John Isner power 0
-f Angelique Kerber return 0
-m Stan Wawrinka defense 0
+m Marin Cilic serve 0
+m Roger Federer power 0
+f Rafael Nadal return 0
+m Kevin Anderson defense 0
 m Novak Djokovic mind 0
-m Roger Federer serve 1
-m Andy Murray power 1
+m Ivo Karlovic serve 1
+m Serena Williams return 1
 
 Santay 
-m Milos Raonic serve 0
-m Roger Federer power 0
-m Rafael Nadal return 0
-m Grigor Dimitrov defense 0
+m Roger Federer serve 0
+m John Isner power 0
+m Novak Djokovic return 0
+m Rafael Nadal defense 0
 m Kei Nishikori mind 0
-f Angelique Kerber defense 1
-m Dominic Thiem return 1
+f Andy Murray mind 1
+m Karen Khachanov power 1
 
 Geoff
-m Marin Cilic serve 0
-m Milos Raonic power 0
-m Andy Murray return 0
-m Novak Djokovic defense 0
-m Stan Wawrinka mind 0
-m Rafael Nadal mind 1
-m Jo-Wilfried Tsonga serve 1
+m Kevin Anderson serve 0
+m Marin Cilic power 0
+m Roger Federer return 0
+m Alexander Zverev defense 0
+m Rafael Nadal mind 0
+m Stefanos Tsitsipas defense 1
+m Dominic Thiem power 1
 
 Jack
 m John Isner serve 0
-m Stan Wawrinka power 0
-m Novak Djokovic return 0
-m Andy Murray defense 0
+m Milos Raonic power 0
+m Naomi Osaka return 0
+m Novak Djokovic defense 0
 m Roger Federer mind 0
-m Gael Monfils power 1
-m Dominic Thiem power 1
+m Rafael Nadal power 1
+m Simona Halep power 1
 
 Steve
-m Ivo Karlovic serve 0
-m Marin Cilic power 0
-f Serena Williams return 0
-m Milos Raonic defense 0
-m Andy Murray mind 0
-m Tomas Berdych power 1
-m Novak Djokovic power 1
+m Milos Raonic serve 0
+m Ivo Karlovic power 0
+f Angelique Kerber return 0
+m Roger Federer defense 0
+m Alexander Zverev mind 0
+m Serena Williams defense 1
+m Kevin Anderson power 1

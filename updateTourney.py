@@ -141,27 +141,8 @@ def updateLeague(tourneyDay,todayDate = None):
 					#print soup.find('div', {'class': 'teaminfo team' + orderName })
 					player.alive = 0
 					print player.name, ' here'
-
-
-
-			# elif player.name in losers:
-
-			# 	#orderBool = (player.name.split(' ')[1] < winners[losers.index(player.name)].split(' ')[1])
-				
-			# 	pointsEarned = getPoints(player.name, losers.index(player.name), baseURL, player.attribute, 
-			# 					statMap, orderBool, links, neededStats)
-
-			# 	player.alive = 0
-
 			else:
 				dailyStatus = "DNP"
-				# if player.sex == 'f':
-				# 	femaleResult = raw_input("Score for " + player.name + " " + player.attr  +  ": ")
-				# 	if femaleResult.isdigit() or femaleResult[1:].isdigit:
-				# 		pointsEarned = int(femaleResult)
-				# 	elif femaleResult == "OUT":
-				# 		player.alive = 0
-				# 		dailyStatus = femaleResult
 
 				player.history.append((todayDate, dailyStatus))
 				continue
