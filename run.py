@@ -8,6 +8,28 @@ def home():
 	users = pickle.load(open("playerInfo.p", "rb")) 
 	return render_template('index.html', users=users)
 
+@app.route('/history/<tournament>')
+def DisplayTournament(tournament):
+	tournament_str = '_'.join(tournament.split('-'))
+	file_name = '_'.join(tournament.split('-')) + '.p'
+	tournament_data = pickle.load(open(file_name, "rb"))
+	return render_template('history/index.html', 
+							users=tournament_data,
+							tournament=tournament_str,
+							tournament_display=' '.join(tournament.split('-')))
+
+@app.route('/history/<tournament>/<username>')
+def DisplayTournamentUser(tournament, username):
+	file_name = '_'.join(tournament.split('-')) + '.p'
+	users = pickle.load(open(file_name, "rb"))
+	for user in users:
+		if username == user.name:
+			return render_template('history/team.html', 
+									user=user, 
+									teamName = username,
+									tournament=tournament)
+	return 'error'
+
 @app.route('/<username>')
 def teamPage(username):
 	users = pickle.load(open("playerInfo.p", "rb"))

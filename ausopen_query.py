@@ -22,14 +22,19 @@ def GetDayMatches(day):
 	match_dict = {}
 
 	for match_id in match_ids:
+		print("Match id: %s", match_id)
 		match_url = CreateGetMatchUrl(match_id)
 		match = GetMatch(match_url)
 
 		stats = GetMatchStats(match)
+		pp.pprint(stats)
 		players = GetMatchPlayerNames(match)
+		pp.pprint(players)
 
 		match_dict[players['playerA']] = ['playerA', stats]
 		match_dict[players['playerB']] = ['playerB', stats]
+
+	return match_dict
 
 
 def GetMatch(url):

@@ -1,6 +1,7 @@
 import ausopen_query
 
 import cPickle as pickle
+import datetime
 
 def ServeScore(index, stats):
 	aces = stats['Aces'][index]
@@ -42,7 +43,6 @@ def GetPoints(index, attribute, stats):
 
 def UpdateLeague(day):
 	tourney_data = pickle.load(open( "playerInfo.p", "rb" ))
-	stat_map = pickle.load(open("statMap.p", "rb"))
 	
 	player_matches = ausopen_query.GetDayMatches(day)
 
@@ -64,19 +64,19 @@ def UpdateLeague(day):
 
 			player_index = None
 			if match_stats[0] == 'playerA':
-				player_index = 'teamA'
+				player_index = 0
 			else:
-				player_index = 'teamB'
+				player_index = 1
 
 			points_earned = GetPoints(player_index, player.attribute,
 									  match_stats[1])
 			player.points = player.points + points_earned
 			player.history.append((date_formatted, points_earned))
-			user.total = user.total + points_earned
+			team.total = team.total + points_earned
 
 		for player in team.bench:
-			if benchPlayer.alive != 1:
-				benchPlayer.history.append((date_formatted, 'OUT'))
+			if player.alive != 1:
+				player.history.append((date_formatted, 'OUT'))
 				continue
 
 			match_stats = None

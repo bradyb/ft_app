@@ -1,14 +1,14 @@
 <!DOCTYPE html> 
 	<html>
 	<head>
-		<title>Fantasy Tennis</title>
+		<title>{{ tournament_display }}</title>
 		<!-- link to main stylesheet -->
-		<link rel="stylesheet" href="../static/css/tennis.css">
+		<link rel="stylesheet" href="../../static/css/tennis.css">
 	</head>
 
 	<body>
 		<header id="header">
-				 <h1>Fantasy Tennis</h1>
+				 <h1>{{ tournament_display }}</h1>
 		</header>
 		<div style = "text-align: center;">
 		<div style="display: inline-block; text-align: left; max-width: 60%;">
@@ -24,7 +24,7 @@
   		</tr> 
   		
   		{% for person in users %}
-  			<tr><td><a href= {{ person.name }} >{{ person.name }}</a></td>
+  			<tr><td><a href= {{ tournament + '/' + person.name }} >{{ person.name }}</a></td>
 
   			{% for player in person.team %}
   				{% if player.alive|int() == 0 %}
@@ -53,6 +53,9 @@
       <tr><th>History</th></tr>
       <tr><td><a href= "history/2017-aus-open" >2017 Australian Open</a></td></tr>
     </table>
+    <form action="/">
+      <button type="submit">Back to current tournament.</button>
+    </form>
 		<footer>
     		<ul>
         		<li><a href="mailto:ben.brady1224@gmail.com">email</a></li>
