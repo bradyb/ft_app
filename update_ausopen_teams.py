@@ -54,6 +54,8 @@ def UpdateLeague(day):
 			if player.alive != 1:
 				player.history.append((date_formatted, 'OUT'))
 				continue
+			if date_formatted in [day[0] for day in player.history]:
+				continue
 
 			match_stats = None
 			if player.name in player_matches:
@@ -74,9 +76,13 @@ def UpdateLeague(day):
 			player.history.append((date_formatted, points_earned))
 			team.total = team.total + points_earned
 
+			player.alive = match_stats[2] == player_index
+
 		for player in team.bench:
 			if player.alive != 1:
 				player.history.append((date_formatted, 'OUT'))
+				continue
+			if date_formatted in [day[0] for day in player.history]:
 				continue
 
 			match_stats = None
@@ -95,6 +101,8 @@ def UpdateLeague(day):
 			points_earned = GetPoints(player_index, player.attribute,
 									  match_stats[1])
 			player.history.append((date_formatted,'(' + str(points_earned) + ')'))
+			player.alive = match_stats[2] == player_index
+
 
 	tourney_data.sort(key=lambda fPlayer: -1 * fPlayer.total)
 	pickle.dump( tourney_data, open( "playerInfo.p", "wb" ) )

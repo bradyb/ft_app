@@ -6,14 +6,27 @@ import requests
 def CreateGetMatchUrl(match_id):
 	return constants.GET_MATCH_URL_PREFIX + str(match_id)
 
+def CreateGetResultsUrl(day):
+	return constants.GET_RESULTS_URL_PREFIX + str(day) + constants.GET_RESULTS_URL_SUFFIX
+
 def GetDayResults(day):
-	response = requests.get(constants.GET_RESULTS_URL,
+	response = requests.get(CreateGetResultsUrl(day),
 							headers=constants.GET_RESULTS_HEADER)
 	return response.json()['matches']
 
 def GetDayMatchIds(matches):
 	"""Input must be the result of GetDayResults"""
-	return [ match['match_id'].encode("utf-8") for match in matches]
+	match_ids_and_winners = []
+	for match in matches:
+		if match['match_state'] != 'Complete':
+			continue
+		info = [match['match_id'].encode("utf-8")]
+		if 'status' in match['teams'][0] and match['teams'][0]['status'] == 'Winner':
+			info = info + [0]
+		else:
+			info = info + [1]
+		match_ids_and_winners.append(info)
+	return match_ids_and_winners
 
 def GetDayMatches(day):
 	matches = GetDayResults(day)
@@ -21,7 +34,7 @@ def GetDayMatches(day):
 
 	match_dict = {}
 
-	for match_id in match_ids:
+	for match_id, winner in match_ids:
 		print("Match id: %s", match_id)
 		match_url = CreateGetMatchUrl(match_id)
 		match = GetMatch(match_url)
@@ -31,8 +44,8 @@ def GetDayMatches(day):
 		players = GetMatchPlayerNames(match)
 		pp.pprint(players)
 
-		match_dict[players['playerA']] = ['playerA', stats]
-		match_dict[players['playerB']] = ['playerB', stats]
+		match_dict[players['playerA']] = ['playerA', stats, winner]
+		match_dict[players['playerB']] = ['playerB', stats, winner]
 
 	return match_dict
 
@@ -53,7 +66,6 @@ def GetMatchStats(match_dict):
 	        a_breaks_total = int(stat['teamA']['secondary'].split('/')[1]) if formatted_stats['Break points won'][0] else 0
 	        b_breaks_total = int(stat['teamB']['secondary'].split('/')[1]) if formatted_stats['Break points won'][1] else 0
 	        formatted_stats['Break points saved'] = [b_breaks_total - b_breaks_won, a_breaks_total - a_breaks_won]
-	        continue
 	    formatted_stats[stat['name']] = [int(stat['teamA']['primary']), int(stat['teamB']['primary'])]
 	return formatted_stats
 
