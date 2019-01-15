@@ -27,3 +27,23 @@ GET_MATCH_HEADER = {
 GET_MATCH_URL = 'https://prod-scores-api.ausopen.com/match-centre/PS120'
 
 GET_MATCH_URL_PREFIX = 'https://prod-scores-api.ausopen.com/match-centre/'
+
+
+DATES_2019_AUS = [
+	'1/14/19',
+	'1/15/19',
+	'1/16/19',
+	'1/17/19',
+	'1/18/19',
+	'1/19/19',
+	'1/20/19',
+	'1/21/19',
+	'1/22/19',
+	'1/23/19',
+	'1/24/19',
+	'1/25/19',
+	'1/26/19',
+	'1/27/19',
+	'1/28/19',
+	'1/29/19',
+]

@@ -1,4 +1,5 @@
 import ausopen_query
+import constants
 
 import cPickle as pickle
 import datetime
@@ -46,22 +47,27 @@ def UpdateLeague(day):
 	
 	player_matches = ausopen_query.GetDayMatches(day)
 
-	today = datetime.datetime.now()
-	date_formatted =  str(today.month) + '/' + str(today.day) + '/' + str(today.year)
+	
+	date_formatted =  constants.DATES_2019_AUS[int(day)-1]
 
 	for team in tourney_data:
 		for player in team.team:
 			if player.alive != 1:
 				player.history.append((date_formatted, 'OUT'))
 				continue
-			if date_formatted in [day[0] for day in player.history]:
+
+			already_played = False
+			for day in player.history:
+				if date_formatted == day[0] and "-" != day[1]:
+					already_played = True
+			if already_played:
 				continue
 
 			match_stats = None
 			if player.name in player_matches:
 				match_stats = player_matches[player.name]
 			else:
-				player.history.append((date_formatted, "DNP"))
+				player.history.append((date_formatted, "-"))
 				continue
 
 			player_index = None
