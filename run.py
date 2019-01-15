@@ -58,9 +58,11 @@ def subPlayers(username):
 		for user in users:
 			if user.name == username:
 				user.addPickUp(playerName,'m',attrMap[playerAttr])
+				print(user.name + "PICKED UP" + playerName + playerAttr)
 				pickle.dump( users, open( "playerInfo.p", "wb" ) )
 				return render_template('team.html', user=user, teamName = username)
 	else:
+		print(user.name + "SUBBED" + playerName)
 		user = sub.moveFromBench(playerName,username)
 		return render_template('team.html', user=user, teamName=username)
 	return 'error'

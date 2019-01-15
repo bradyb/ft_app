@@ -95,7 +95,7 @@ def UpdateLeague(day):
 			if player.name in player_matches:
 				match_stats = player_matches[player.name]
 			else:
-				player.history.append((date_formatted, "DNP"))
+				player.history.append((date_formatted, "-"))
 				continue
 
 			player_index = None
