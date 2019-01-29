@@ -9,7 +9,7 @@ m Novak Djokovic mind 0
 m Ivo Karlovic serve 1
 m Serena Williams return 1
 
-Santay 
+Santay
 m Roger Federer serve 0
 m John Isner power 0
 m Novak Djokovic return 0
@@ -34,7 +34,7 @@ m Naomi Osaka return 0
 m Novak Djokovic defense 0
 m Roger Federer mind 0
 m Rafael Nadal power 1
-m Simona Halep power 1
+m Simona Halep return 1
 
 Steve
 m Milos Raonic serve 0

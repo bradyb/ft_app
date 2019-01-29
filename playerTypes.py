@@ -1,5 +1,7 @@
 ## tPlayer = tennis player who will belong to fPlayers##
 
+import constants
+
 class tPlayer:
 
 	def __init__(self, name, sex, attribute):
@@ -10,7 +12,7 @@ class tPlayer:
 		self.alive = 1
 		self.history = list()
 
-		
+
 ## fPlayer = fantasy player##
 
 class fPlayer:
@@ -25,11 +27,10 @@ class fPlayer:
 
 		self.bench.append(tPlayer(name, sex, attribute))
 
-		daysOfPlay = len(self.team[0].history)
+		daysOfPlay = 7
 
 		#setting up some dummy data so it doesn't crash when printing the data
-		for counter in range(0, daysOfPlay):
+		for day in range(0, daysOfPlay):
 
-			self.bench[-1].history.append(("0/0/0",'(-)'))
+			self.bench[-1].history.append((constants.DATES_2019_AUS[day],'-'))
 
-	

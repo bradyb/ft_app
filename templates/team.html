@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 	<html>
 	<head>
 		<title>Team | {{ teamName }}</title>
@@ -14,7 +14,7 @@
 		<table>
   		<tr>
   			<th>Date</th>
-    		<th>Serve</th> 
+    		<th>Serve</th>
     		<th>Power</th>
     		<th>Return</th>
     		<th>Defense</th>
@@ -22,7 +22,7 @@
     		<th>Bench</th>
     		<th>Bench</th>
     		<th>Bench<th>
-    	</tr> 
+    	</tr>
       <tr>
 
       <td><a href= "/" >Back to Home</a></td>
@@ -40,59 +40,59 @@
 
         {% if player.attribute|int() == 1 %}
           {% if player.alive|int() == 0 %}
-          <td><strike>{{ player.name }}</strike> / 
+          <td><strike>{{ player.name }}</strike> /
                  Serve</td>
           {% endif %}
           {% if player.alive|int() == 1 %}
-          <td>{{ player.name }} / 
+          <td>{{ player.name }} /
                  Serve</td>
           {% endif %}
         {% endif %}
 
         {% if player.attribute|int() == 2 %}
           {% if player.alive|int() == 0 %}
-          <td><strike>{{ player.name }}</strike> / 
+          <td><strike>{{ player.name }}</strike> /
                  Power</td>
           {% endif %}
           {% if player.alive|int() == 1 %}
-          <td>{{ player.name }} / 
+          <td>{{ player.name }} /
                  Power</td>
           {% endif %}
         {% endif %}
 
         {% if player.attribute|int() == 3 %}
           {% if player.alive|int() == 0 %}
-          <td><strike>{{ player.name }}</strike> / 
+          <td><strike>{{ player.name }}</strike> /
                  Return</td>
           {% endif %}
           {% if player.alive|int() == 1 %}
-          <td>{{ player.name }} / 
+          <td>{{ player.name }} /
                  Return</td>
           {% endif %}
         {% endif %}
 
         {% if player.attribute|int() == 4 %}
           {% if player.alive|int() == 0 %}
-          <td><strike>{{ player.name }}</strike> / 
+          <td><strike>{{ player.name }}</strike> /
                  Defense</td>
           {% endif %}
           {% if player.alive|int() == 1 %}
-          <td>{{ player.name }} / 
+          <td>{{ player.name }} /
                  Defense</td>
           {% endif %}
         {% endif %}
 
         {% if player.attribute|int() == 5 %}
           {% if player.alive|int() == 0 %}
-          <td><strike>{{ player.name }}</strike> / 
+          <td><strike>{{ player.name }}</strike> /
                  Mind</td>
           {% endif %}
           {% if player.alive|int() == 1 %}
-          <td>{{ player.name }} / 
+          <td>{{ player.name }} /
                  Mind</td>
           {% endif %}
         {% endif %}
-        
+
       {% endfor %}
 
       <!--{% if user.bench|length < 3 %}
@@ -113,7 +113,7 @@
 
       {% for day in range(0,user.team[0].history|length)  %}
       <tr>
-        
+
         <td> {{ user.team[0].history[day][0] }} </td>
 
         {% for player in user.team %}
@@ -145,7 +145,7 @@
     	</td>
       {% endfor %}
 
-      </tr>	
+      </tr>
 
 	</table>
 
@@ -157,9 +157,9 @@
 							</footer>
 							</div>
 							</div>
-									
+
 							</body>
-							</html> 
+							</html>
 
 
 

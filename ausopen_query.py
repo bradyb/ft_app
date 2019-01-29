@@ -63,8 +63,8 @@ def GetMatchStats(match_dict):
 	        a_breaks_won = int(stat['teamA']['secondary'].split('/')[0])
 	        b_breaks_won = int(stat['teamB']['secondary'].split('/')[0])
 	        formatted_stats['Break points won'] = [a_breaks_won, b_breaks_won]
-	        a_breaks_total = int(stat['teamA']['secondary'].split('/')[1]) if formatted_stats['Break points won'][0] else 0
-	        b_breaks_total = int(stat['teamB']['secondary'].split('/')[1]) if formatted_stats['Break points won'][1] else 0
+	        a_breaks_total = int(stat['teamA']['secondary'].split('/')[1])
+	        b_breaks_total = int(stat['teamB']['secondary'].split('/')[1])
 	        formatted_stats['Break points saved'] = [b_breaks_total - b_breaks_won, a_breaks_total - a_breaks_won]
 	    else:
 	    	formatted_stats[stat['name']] = [int(stat['teamA']['primary']), int(stat['teamB']['primary'])]

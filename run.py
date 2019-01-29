@@ -62,7 +62,7 @@ def subPlayers(username):
 				pickle.dump( users, open( "playerInfo.p", "wb" ) )
 				return render_template('team.html', user=user, teamName = username)
 	else:
-		print(user.name + "SUBBED" + playerName)
+		print(username + "SUBBED" + playerName)
 		user = sub.moveFromBench(playerName,username)
 		return render_template('team.html', user=user, teamName=username)
 	return 'error'
