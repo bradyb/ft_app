@@ -1,7 +1,7 @@
 import ausopen_query
 import constants
 
-import cPickle as pickle
+import _pickle as pickle
 import pprint as pp
 import os
 
@@ -28,6 +28,12 @@ def MindScore(index, stats):
 
 	return 5 * (breaks_won + breaks_saved) - 3 * opponent_breaks_won
 
+def ComputeFrName(name):
+    if name == 'Juan Martin Del Potro':
+        return 'JM. DEL POTRO'
+    else:
+        return name[0].upper() + '. ' + name.split(' ')[-1].upper()
+
 def GetPoints(index, attribute, stats):
 	if attribute == 1:
 		return ServeScore(index, stats)
@@ -47,10 +53,10 @@ def GetPoints(index, attribute, stats):
 def UpdateLeague(day):
 	tourney_data = pickle.load(open( "playerInfo.p", "rb" ))
 
-	player_matches = ausopen_query.GetDayMatches(day)
+	player_matches = ausopen_query.GetDayMatches(constants.DATES_2019_FR[day])
 
 
-	date_formatted =  constants.DATES_2019_AUS[int(day)-1]
+	date_formatted =  constants.DATES_2019_FR[day]
 
 	for team in tourney_data:
 		for player in team.team:
@@ -69,8 +75,8 @@ def UpdateLeague(day):
 		        player.history.append((date_formatted, 'OUT'))
 		        continue
 		    match_stats = None
-		    if player.name in player_matches:
-		        match_stats = player_matches[player.name]
+		    if ComputeFrName(player.name) in player_matches:
+		        match_stats = player_matches[ComputeFrName(player.name)]
 		    elif added_day:
 		        continue
 		    else:
@@ -80,11 +86,6 @@ def UpdateLeague(day):
 		    player_index = 1
 		    if match_stats[0] == 'playerA':
 		        player_index = 0
-		    if player.name == 'Rafael Nadal':
-		        pp.pprint(player_index)
-		        pp.pprint(player.attribute)
-		        pp.pprint(match_stats[1])
-
 
 		    points_earned = GetPoints(player_index, player.attribute, match_stats[1])
 		    player.points = player.points + points_earned
@@ -137,14 +138,10 @@ def UpdateLeague(day):
 
 
 	tourney_data.sort(key=lambda fPlayer: -1 * fPlayer.total)
-	#for user in tourney_data:
-	#    for player in user.team:
-	#        pp.pprint(player.name)
-	#        pp.pprint(player.history)
 	pickle.dump( tourney_data, open( "playerInfo.p", "wb" ) )
 	return
 
 
 if __name__ == "__main__":
-    os.chdir("/home/bees1224/ft_app/")
-    UpdateLeague(10)
+    #os.chdir("/home/bees1224/ft_app/")
+    UpdateLeague(0)
