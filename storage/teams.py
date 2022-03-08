@@ -24,6 +24,28 @@ class Team:
         for player_name, _ in self.bench.items():
             self.player_to_date_to_match_stat[player_name] = {}
 
+    def _player_list_dictionary(player_to_position: PlayerToPosition):
+        return {
+            player: position.name for (player, position) in player_to_position.items()
+        }
+
+    def _player_to_date_match_stat_dict(self):
+        player_to_match_stat_dict = {}
+        for (
+            player,
+            date_to_match_stat_dict,
+        ) in self.player_to_date_to_match_stat.items():
+            player_to_match_stat_dict[player] = {}
+            for date, match_stat in date_to_match_stat_dict.items():
+                player_to_match_stat_dict[player][date] = dict(match_stat)
+
+    def __iter__(self):
+        yield ("name", self.name)
+        yield ("score", self.score)
+        yield ("lineup", Team._player_list_dictionary(self.lineup))
+        yield ("bench", Team._player_list_dictionary(self.bench))
+        yield ("player_to_date_to_match_stat", self._player_to_date_match_stat_dict())
+
     def _has_player(self, name: str) -> None:
         return name in self.lineup or name in self.bench
 
@@ -33,7 +55,9 @@ class Team:
         else:
             return self.bench[name]
 
-    def update_player(self, match_date: date, name: str, match_stats: PositionToMatchStat):
+    def update_player(
+        self, match_date: date, name: str, match_stats: PositionToMatchStat
+    ):
         if not self._has_player(name):
             return
         position = self._get_player_position(name)
