@@ -46,7 +46,7 @@ class ServeMatchStat(MatchStat):
     def __iter__(self):
         yield (POSITION_KEY, Position.SERVE.name)
         yield (Stat.ACES.name, self.aces)
-        yield (Stat.DOUBLE_FAULTS, self.double_faults)
+        yield (Stat.DOUBLE_FAULTS.name, self.double_faults)
 
 
 class PowerMatchStat(MatchStat):
@@ -61,7 +61,7 @@ class PowerMatchStat(MatchStat):
     def __iter__(self):
         yield (POSITION_KEY, Position.POWER.name)
         yield (Stat.WINNERS.name, self.winners)
-        yield (Stat.UNFORCED_ERRORS, self.unforced_errors)
+        yield (Stat.UNFORCED_ERRORS.name, self.unforced_errors)
 
 
 class DefenseMatchStat(MatchStat):
@@ -108,5 +108,5 @@ class MindMatchStat(MatchStat):
     def __iter__(self):
         yield (POSITION_KEY, Position.MIND.name)
         yield (Stat.BREAK_POINTS_WON.name, self.break_points_won)
-        yield (Stat.BREAK_POINTS_SAVED, self.break_points_saved)
-        yield (Stat.BREAK_POINTS_LOST, self.break_points_lost)
+        yield (Stat.BREAK_POINTS_SAVED.name, self.break_points_saved)
+        yield (Stat.BREAK_POINTS_LOST.name, self.break_points_lost)
