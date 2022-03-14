@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package ft;
+
+message Team {
+    optional string name = 1;
+    
+    // TODO: Finish implemeting the Player proto and include it here.
+}

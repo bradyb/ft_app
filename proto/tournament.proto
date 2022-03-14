@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+import "team.proto";
+
+package ft;
+
+message Tournament {
+    repeated Team teams = 1;
+}
