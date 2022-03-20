@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+import "proto/stat.proto";
+
+package ft;
+
+message Match {
+    optional bool starting = 1;
+    
+    oneof score_type {
+        ServeStat serve_stat = 2;
+        PowerStat power_stat = 3;
+        DefenseStat defense_stat = 4;
+        ReturnStat return_stat = 5;
+        MindStat mind_stat = 6;
+    }
+}

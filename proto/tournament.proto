@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-import "team.proto";
+import "proto/team.proto";
 
 package ft;
 

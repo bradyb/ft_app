@@ -1,9 +1,14 @@
 syntax = "proto2";
 
+import "proto/player.proto";
+import "proto/stat.proto";
+
 package ft;
 
 message Team {
     optional string name = 1;
     
-    // TODO: Finish implemeting the Player proto and include it here.
+    optional int64 score = 2;
+
+    map<string, Player> position_to_player = 3;
 }

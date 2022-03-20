@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+package ft;
+
+enum Stat {
+    SERVE = 0;
+    POWER = 1;
+    DEFENSE = 2;
+    RETURN = 3;
+    MIND = 4;
+}
+
+message ServeStat {
+    optional int32 aces = 1;
+
+    optional int32 double_faults = 2;
+}
+
+message PowerStat {
+    optional int32 winners = 1;
+
+    optional int32 unforced_errors = 2;
+}
+
+message DefenseStat {
+    optional int32 second_serves_won_pct = 1;
+}
+
+message ReturnStat {
+    optional int32 returning_points_won_pct = 1;
+}
+
+message MindStat {
+    optional int32 break_points_won = 1;
+
+    optional int32 break_points_saved = 2;
+
+    optional int32 break_points_lost = 3;
+}
