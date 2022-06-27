@@ -1,0 +1,6 @@
+# proto/tournament.proto
+
+teams {
+    name: "Ben"
+    score: 79
+}    
